@@ -10,7 +10,7 @@ end
 
 recipe = Recipe.new
 
-scraper.get('http://cooking.nytimes.com/recipes/1016329-red-velvet-cake') do |page|
+scraper.get('http://cooking.nytimes.com/recipes/1017773-fannie-farmers-parker-house-rolls') do |page|
 
   recipe.title = page.search('.recipe-title').text.strip
   recipe.description = page.search('.topnote > p:not(.related-article)').text.strip
@@ -18,21 +18,20 @@ scraper.get('http://cooking.nytimes.com/recipes/1016329-red-velvet-cake') do |pa
 
   recipe.steps = []
   page.search('.recipe-steps').children.each_with_index do |step, index|
-    recipe.steps[index] = step.text.strip
-    recipe.steps = recipe.steps.reject { |r| r.to_s.empty? }
+    recipe.steps << step.text.strip unless step.text.strip.to_s.empty?
   end
 
   recipe.author = page.search('.byline-name').text.strip
 
   recipe.ingredients = []
   page.search('.recipe-ingredients')[0].children.each_with_index do |step, index|
-    recipe.ingredients[index] = step.text.strip.gsub("\n", '').squeeze("             ")
-    recipe.ingredients = recipe.ingredients.reject { |r| r.to_s.empty? }
+    recipe.ingredients << step.text.strip.gsub(/\s+/, " ") unless step.text.strip.to_s.empty?
   end
 
   recipe.photo_url = page.search('.media-container').children[1]['src']
 end
 
+# debug
 # puts recipe.title
 # puts recipe.description
 # puts recipe.url
