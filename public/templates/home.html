@@ -1,0 +1,14 @@
+<div class="login-container container">
+  <h1>Login</h1>
+  <a href="/users/sign_up"><em>...or sign up</em></a>
+  <div class="input-group">
+    <br>
+    <input type="text" class="form-control" placeholder="Email" ng-model='credentials.email'>
+    <br>
+    <input type="password" class="form-control" placeholder="Password" ng-model='credentials.password'>
+    <br>
+    <input type="password" class="form-control" placeholder="Password Confirmation" ng-model='credentials.password_confirmation'>
+    <br>
+    <button class="btn btn-primary" ng-click="login()">Login</button>
+  </div>
+</div>
