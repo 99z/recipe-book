@@ -12,5 +12,14 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+//= require twitter/bootstrap
+
+//= require angular
+//= require underscore
+//= require restangular
+//= require angular-ui-router
+//= require angular-devise
+//= require xeditable
+//= require angular-modal-service
+
 //= require_tree .
