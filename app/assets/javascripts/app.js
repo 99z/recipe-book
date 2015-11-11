@@ -29,6 +29,23 @@ recipeBook.config(function($stateProvider, $urlRouterProvider) {
       url: "/index",
       templateUrl: "/templates/dashboard/index.html",
       controller: "dashboardCtrl"
-    });
+    })
+
+
+    .state('recipes', {
+      url: "/recipes",
+      templateUrl: "/templates/recipes/layout.html"
+    })
+
+    .state('recipes.show', {
+      url: "/:id",
+      templateUrl: "/templates/recipes/show.html",
+      controller: "recipesCtrl",
+      resolve: {
+        recipe: ['Restangular', '$stateParams', function(Restangular, $stateParams){
+          return Restangular.one('recipes', $stateParams.id).get();
+        }]
+      }
+    })
 
 });

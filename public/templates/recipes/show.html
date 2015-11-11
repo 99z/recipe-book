@@ -1,0 +1,31 @@
+<div class='row text-center'>
+
+  <div class='col-sm-8'>
+    <h2>{{ recipe.title }}</h2>
+    <h3>{{ recipe.author }}</h3>
+    <h3>Source, description, etc</h3>
+  </div>
+
+  <div class='col-sm-4'>
+    <img src="{{ recipe.photo_url }}" class='img img-responsive'>
+  </div>
+
+</div>
+
+
+
+<div class='row'>
+
+  <div class='col-sm-8'>
+    <h4>Directions</h4>
+    <p ng-repeat='instruction in recipe.instructions'>{{ instruction.body }}</p>
+  </div>
+
+  <div class='col-sm-4'>
+    <h4>Ingredients</h4>
+    <ul>
+      <li ng-repeat='ingredient in recipe.ingredients'>{{ ingredient.name }}</li>
+    </ul>
+  </div>
+
+</div>

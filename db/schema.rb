@@ -11,7 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151108225936) do
+ActiveRecord::Schema.define(version: 20151111131042) do
+
+  create_table "ingredients", force: :cascade do |t|
+    t.string   "name",       default: "Add an ingredient...", null: false
+    t.integer  "recipe_id",                                   null: false
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+  end
+
+  create_table "instructions", force: :cascade do |t|
+    t.text     "body",       default: "Add your directions here...", null: false
+    t.integer  "recipe_id",                                          null: false
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
+  end
 
   create_table "profiles", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -20,6 +34,15 @@ ActiveRecord::Schema.define(version: 20151108225936) do
     t.string   "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "recipes", force: :cascade do |t|
+    t.string   "title",      default: "Add a title...",                                                              null: false
+    t.string   "author",     default: "Add an author...",                                                            null: false
+    t.string   "photo_url",  default: "https://placeholdit.imgix.net/~text?txtsize=30&txt=320%C3%97320&w=320&h=320"
+    t.integer  "user_id",                                                                                            null: false
+    t.datetime "created_at",                                                                                         null: false
+    t.datetime "updated_at",                                                                                         null: false
   end
 
   create_table "users", force: :cascade do |t|
