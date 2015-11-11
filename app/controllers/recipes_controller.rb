@@ -5,7 +5,7 @@ class RecipesController < ApplicationController
 
     if @recipe
       respond_to do |format|
-        format.json { render json: @recipe, status: 200 }
+        format.json { render json: @recipe.to_json(:include => [:instructions, :ingredients]), status: 200 }
       end
     else
       respond_to do |format|

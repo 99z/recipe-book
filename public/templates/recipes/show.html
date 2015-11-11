@@ -18,13 +18,13 @@
 
   <div class='col-sm-8'>
     <h4>Directions</h4>
-    <p>{{ recipe.body }}</p>
+    <p ng-repeat='instruction in recipe.instructions'>{{ instruction.body }}</p>
   </div>
 
   <div class='col-sm-4'>
     <h4>Ingredients</h4>
     <ul>
-      <li ng-repeat='ingredient in recipe.ingredients'>{{ ingredient }}</li>
+      <li ng-repeat='ingredient in recipe.ingredients'>{{ ingredient.name }}</li>
     </ul>
   </div>
 
