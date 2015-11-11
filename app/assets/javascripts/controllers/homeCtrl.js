@@ -16,6 +16,6 @@ recipeBook.controller('homeCtrl', ['$scope', 'Restangular', 'Auth', '$location',
   };
 
   $scope.$on('devise:login', function(event, currentUser){
-    $location.path("/boards/index");
+    $location.path("/dashboard/index");
   });
 }]);
