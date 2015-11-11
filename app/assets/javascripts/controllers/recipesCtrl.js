@@ -1,6 +1,7 @@
-recipeBook.controller('recipesCtrl', ['$scope', 'Restangular', 'Auth', function($scope, Restangular,  Auth){
+recipeBook.controller('recipesCtrl', ['$scope', 'Restangular', 'Auth', 'recipe', function($scope, Restangular,  Auth, recipe){
 
-  $scope.testValue = "angular works"
+  $scope.receipe = recipe;
+
   Auth.currentUser().then( function(user) {
       $scope.currentUser = user
     })

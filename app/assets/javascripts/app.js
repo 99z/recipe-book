@@ -40,7 +40,12 @@ recipeBook.config(function($stateProvider, $urlRouterProvider) {
     .state('recipes.show', {
       url: "/:id",
       templateUrl: "/templates/recipes/show.html",
-      controller: "recipesCtrl"
+      controller: "recipesCtrl",
+      resolve: {
+        recipe: ['Restangular', '$stateParams', function(Restangular, $stateParams){
+          return Restangular.one('recipes', $stateParams.id);
+        }]
+      }
     })
 
 });
