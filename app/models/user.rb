@@ -6,5 +6,5 @@ class User < ActiveRecord::Base
 
 
   has_one :profile
-  has_many :recipes
+  has_many :recipes, :dependent => :destroy
 end
