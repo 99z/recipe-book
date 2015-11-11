@@ -7,7 +7,7 @@
   </div>
 
   <div class='col-sm-4'>
-    <img src="https://placeholdit.imgix.net/~text?txtsize=30&txt=320%C3%97320&w=320&h=320" class='img img-responsive'>
+    <img src="{{ recipe.photo_url }}" class='img img-responsive'>
   </div>
 
 </div>
@@ -18,15 +18,13 @@
 
   <div class='col-sm-8'>
     <h4>Directions</h4>
-    <p>And the directions go here</p>
+    <p>{{ recipe.body }}</p>
   </div>
 
   <div class='col-sm-4'>
     <h4>Ingredients</h4>
     <ul>
-      <li>Ingredient One</li>
-      <li>Ingredient Two</li>
-      <li>Ingredient Three</li>
+      <li ng-repeat='ingredient in recipe.ingredients'>{{ ingredient }}</li>
     </ul>
   </div>
 
