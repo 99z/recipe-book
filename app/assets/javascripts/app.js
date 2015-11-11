@@ -43,7 +43,7 @@ recipeBook.config(function($stateProvider, $urlRouterProvider) {
       controller: "recipesCtrl",
       resolve: {
         recipe: ['Restangular', '$stateParams', function(Restangular, $stateParams){
-          return Restangular.one('recipes', $stateParams.id);
+          return Restangular.one('recipes', $stateParams.id).get();
         }]
       }
     })
