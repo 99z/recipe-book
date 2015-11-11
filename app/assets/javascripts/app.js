@@ -29,6 +29,18 @@ recipeBook.config(function($stateProvider, $urlRouterProvider) {
       url: "/index",
       templateUrl: "/templates/dashboard/index.html",
       controller: "dashboardCtrl"
-    });
+    })
+
+
+    .state('recipes', {
+      url: "/recipes",
+      templateUrl: "/templates/recipes/layout.html"
+    })
+
+    .state('recipes.show', {
+      url: "/:id",
+      templateUrl: "/templates/recipes/show.html",
+      controller: "recipesCtrl"
+    })
 
 });
