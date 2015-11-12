@@ -31,7 +31,6 @@ recipeBook.config(function($stateProvider, $urlRouterProvider) {
       controller: "dashboardCtrl"
     })
 
-
     .state('recipes', {
       url: "/recipes",
       templateUrl: "/templates/recipes/layout.html"
@@ -44,8 +43,18 @@ recipeBook.config(function($stateProvider, $urlRouterProvider) {
       resolve: {
         recipe: ['Restangular', '$stateParams', function(Restangular, $stateParams){
           return Restangular.one('recipes', $stateParams.id).get();
-        }]
-      }
+        }]}
+      })
+
+    .state('users', {
+      url: "/users",
+      templateUrl: "/templates/users/index.html"
     })
+
+    .state('users.show', {
+      url: "/:userId",
+      templateUrl: "/templates/users/show.html",
+      controller: "userShowCtrl"
+    });
 
 });
