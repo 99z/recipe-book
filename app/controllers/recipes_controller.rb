@@ -15,4 +15,12 @@ class RecipesController < ApplicationController
 
   end
 
+
+
+  def update
+    # need to pass recipe object to task
+    # runs task
+    # respond with new recipe as json
+  end
+
 end
