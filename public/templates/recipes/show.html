@@ -42,7 +42,7 @@
   <div class='col-sm-4'>
     <h4>Ingredients</h4>
     <ul>
-      <li ng-repeat='ingredient in recipe.ingredients'>{{ ingredient.name }}</li>
+      <li ng-repeat='ingredient in recipe.ingredients' editable-text='ingredient.name' onaftersave='updateRecipe()'>{{ ingredient.name }}</li>
     </ul>
   </div>
 

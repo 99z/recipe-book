@@ -34,6 +34,9 @@ class RecipesController < ApplicationController
 
   def update
     @recipe = Recipe.where(:id => params[:id])[0]
+    puts "~~~~"
+    puts recipe_params
+    puts "~~~~"
 
     if @recipe.update(recipe_params)
       if params['$name'] === 'scraper'
@@ -61,7 +64,9 @@ class RecipesController < ApplicationController
                                       :author,
                                       :photo_url,
                                       :description,
-                                      :url)
+                                      :url,
+                                      :ingredients_attributes => [:id, :name],
+                                      :instructions_attributes => [:id, :body])
     end
 
 end

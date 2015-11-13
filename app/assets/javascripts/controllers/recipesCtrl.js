@@ -15,7 +15,12 @@ recipeBook.controller('recipesCtrl', ['$scope', 'Restangular', 'Auth', 'recipe',
 
 
   $scope.updateRecipe = function() {
-    Restangular.one('recipes', $scope.recipe.id).patch($scope.recipe);
+    var recipeNested = {}
+    recipeNested['recipe'] = $scope.recipe
+    recipeNested['recipe']['ingredients_attributes'] = $scope.recipe.ingredients
+    recipeNested['recipe']['instructions_attributes'] = $scope.recipe.instructions
+
+    Restangular.one('recipes', $scope.recipe.id).patch(recipeNested);
   };
 
 }]);
