@@ -36,7 +36,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.where(:id => params[:id])[0]
 
     if @recipe.update(recipe_params)
-      if params[:url]
+      if params['$name'] === 'scraper'
         Rake::Task['recipes:scrape_nyt'].invoke(@recipe)
         Rake::Task['recipes:scrape_nyt'].reenable
         @recipe = Recipe.where(:id => params[:id])[0]

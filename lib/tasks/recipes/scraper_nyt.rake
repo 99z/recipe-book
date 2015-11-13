@@ -32,7 +32,7 @@ namespace :recipes do
         recipe.ingredients.build(name: step.text.strip.gsub(/\s+/, " ")) unless step.text.strip.to_s.empty?
       end
 
-      # get an error for undefined method [] if no pic
+      recipe.photo_url = nil
       media_container = page.search('.media-container')
       recipe.photo_url = media_container.children[1]['src'] unless media_container.empty?
     end
@@ -40,6 +40,7 @@ namespace :recipes do
 
     recipe.save!
 
+    puts "SCRAPING SCRAPING SCRAPING\nSCRAPING SCRAPING SCRAPING\nSCRAPING SCRAPING SCRAPING"
 
   end
 end

@@ -19,9 +19,9 @@
 <div class='row text-center'>
 
   <div class='col-sm-8'>
-    <h2>{{ recipe.title }}</h2>
-    <h3>{{ recipe.author }}</h3>
-    <h3>Source, description, etc</h3>
+    <h2 editable-text='recipe.title' onaftersave='updateRecipe()'>{{ recipe.title }}</h2>
+    <h3 editable-text='recipe.author' onaftersave='updateRecipe()'>{{ recipe.author }}</h3>
+    <p editable-text='recipe.description' onaftersave='updateRecipe()'>{{ recipe.description }}</p>
   </div>
 
   <div class='col-sm-4'>
@@ -36,7 +36,7 @@
 
   <div class='col-sm-8'>
     <h4>Directions</h4>
-    <p ng-repeat='instruction in recipe.instructions'>{{ instruction.body }}</p>
+    <p ng-repeat='instruction in recipe.instructions' editable-text='instruction.body' onaftersave='updateRecipe()'>{{ instruction.body }}</p>
   </div>
 
   <div class='col-sm-4'>
