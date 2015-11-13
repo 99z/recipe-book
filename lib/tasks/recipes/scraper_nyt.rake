@@ -3,23 +3,23 @@ require 'mechanize'
 
 namespace :recipes do
   desc 'Scrapes recipe from NYT'
-  task :scrape_nyt, [:url] => :environment do |t, args|
-
+  task :scrape_nyt, [:recipe] => :environment do |t, args|
 
     scraper = Mechanize.new do |agent|
       agent.user_agent_alias = 'Mac Safari'
-      agent.history_added = Proc.new { sleep 0.5 } # just in case
+      # agent.history_added = Proc.new { sleep 0.5 } # just in case
     end
 
-    recipe = Recipe.new
+    recipe = Recipe.find(args.recipe.id)
 
-    scraper.get(args.url) do |page|
+    scraper.get(recipe.url) do |page|
 
       recipe.title = page.search('.recipe-title').text.strip
       recipe.description = page.search('.topnote > p:not(.related-article)').text.strip
       recipe.url = page.uri.to_s
 
       # instructions
+      recipe.instructions.delete_all
       page.search('.recipe-steps').children.each_with_index do |step, index|
         recipe.instructions.build(body: step.text.strip) unless step.text.strip.to_s.empty?
       end
@@ -27,12 +27,14 @@ namespace :recipes do
       recipe.author = page.search('.byline-name').text.strip
 
       # ingredients
+      recipe.ingredients.delete_all
       page.search('.recipe-ingredients')[0].children.each_with_index do |step, index|
         recipe.ingredients.build(name: step.text.strip.gsub(/\s+/, " ")) unless step.text.strip.to_s.empty?
       end
 
-      recipe.photo_url = page.search('.media-container').children[1]['src']
-      recipe.user_id = 2
+      # get an error for undefined method [] if no pic
+      media_container = page.search('.media-container')
+      recipe.photo_url = media_container.children[1]['src'] unless media_container.empty?
     end
 
 

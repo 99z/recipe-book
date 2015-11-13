@@ -1,9 +1,9 @@
 <div class='row'>
-  <form name='scraper-url' class='form-horizontal'>
+  <form name='scraper' class='form-horizontal' ng-submit='submitScrape()'>
 
     <div class='col-xs-10'>
       <div class='form-group'>
-        <input type="text" placeholder='Enter a URL to import...' class='form-control'>
+        <input type="text" placeholder='Enter a URL to import...' class='form-control' ng-model='scraper.url'>
       </div>
     </div>
 
