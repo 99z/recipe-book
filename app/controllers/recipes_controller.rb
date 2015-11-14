@@ -4,6 +4,8 @@ RecipeBook::Application.load_tasks
 
 class RecipesController < ApplicationController
 
+  before_action :require_current_user, :except => [:index]
+
 
   def create
     @recipe = current_user.recipes.create!
@@ -67,6 +69,22 @@ class RecipesController < ApplicationController
   end
 
 
+  def destroy
+    @recipe = Recipe.find(params[:id])
+
+    if @recipe.destroy
+      respond_to do |format|
+        format.json { render :nothing => :true, :status => 204 }
+      end
+    else
+      respond_to do |format|
+        format.json { render :nothing => :true, :status => 422 }
+      end
+    end
+
+  end
+
+
   private
 
     def recipe_params
@@ -77,6 +95,17 @@ class RecipesController < ApplicationController
                                       :url,
                                       :ingredients_attributes => [:id, :name],
                                       :instructions_attributes => [:id, :body])
+    end
+
+
+    def require_current_user
+      recipe = Recipe.find(params[:id])
+      unless recipe.user == current_user
+        flash.now[:danger] = "You're not authorized to do this!"
+        respond_to do |format|
+          format.json { render :nothing => :true, :status => 401 }
+        end
+      end
     end
 
 end

@@ -26,6 +26,7 @@
 
   <div class='col-sm-4'>
     <img src="{{ recipe.photo_url }}" class='img img-responsive'>
+    <button class='btn btn-warning btn-sm' ng-click='deleteRecipe()' ng-if='owner'>Delete Recipe</button>
   </div>
 
 </div>
