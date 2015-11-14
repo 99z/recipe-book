@@ -13,3 +13,64 @@
  *= require_tree .
  *= require_self
  */
+
+table {
+	margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+table th,
+table td {
+	padding: 10px 20px;
+	text-align: left;
+	border-bottom: 1px solid #ccc;
+}
+
+table th {
+	border-width: 2px;
+}
+
+table td {
+	color: #666;
+}
+
+table tr:last-child th,
+table tr:last-child td {
+	border-bottom: none;
+}
+
+table tr:nth-child(even) {
+	background: #eee;
+}
+
+div.recipe-image {
+  position: relative;
+  float:left;
+  margin:5px;
+}
+
+div.recipe-image:hover img{
+  opacity:0.5;
+}
+
+div.recipe-image:hover button {
+  display: block;
+}
+
+div.recipe-image button {
+  position:absolute;
+  display:none;
+}
+
+div.recipe-image button.view {
+  top: 50%;
+  left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+div.recipe-image button.add {
+	top: 75%;
+	left: 50%;
+	transform: translate(-50%, -75%);
+}
