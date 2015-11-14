@@ -32,18 +32,50 @@
   </div>
 
   <div class="col-xs-3">
-    <p class="pull-right" ng-if="$scope.currentUser.id == $stateParams.userId">view buttons</p>
+    <p class="pull-right" ng-if="$scope.currentUser.id == $stateParams.userId">
+      <a href="#" ng-click="viewMode = 'thumbnail'">thumbnail</a>
+      <a href="#" ng-click="viewMode = 'list'">list</a>
+    </p>
   </div>
 
 </div>
 
-<div class="row">
+<div ng-if="viewMode == 'thumbnail'" class="row">
 
   <div ng-repeat="recipe in recipes" class="col-xs-3 text-center">
-    <img class="img-responsive" src="{{ recipe.photo_url }}">
+
+    <div class="recipe-image">
+      <img class="img-responsive" src="{{ recipe.photo_url }}">
+      <button class="btn btn-primary view">view</button>
+      <button class="btn btn-primary add">add to my book</button>
+    </div>
+
     <p><strong>{{ recipe.title }}</strong> by {{ recipe.author }}</p>
     <p>ADD RECIPE ORIGIN ATTRIBUTE HERE!</p>
     <p>Difficulty - length - rating</p>
+  </div>
+
+</div>
+
+<div ng-if="viewMode == 'list'" class="row">
+
+  <div class="col-xs-12">
+    <table>
+    	<tr>
+    		<th>Title</th>
+    		<th>Author</th>
+        <th>Origin</th>
+        <th>Difficulty</th>
+    		<th>Rating</th>
+    	</tr>
+    	<tr ng-repeat="recipe in recipes">
+    		<td>{{ recipe.title }}</td>
+    		<td>{{ recipe.author }}</td>
+        <td>{{ recipe.origin }}</td>
+        <td>{{ recipe.difficulty }}</td>
+    		<td>★★★★★</td>
+    	</tr>
+    </table>
   </div>
 
 </div>
