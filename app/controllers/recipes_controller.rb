@@ -4,7 +4,7 @@ RecipeBook::Application.load_tasks
 
 class RecipesController < ApplicationController
 
-  before_action :require_current_user, :except => [:index]
+  before_action :require_current_user, :except => [:index, :show]
 
 
   def create

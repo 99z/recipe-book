@@ -1,4 +1,4 @@
-<div class='row'>
+<div class='row' ng-if='owner'>
   <form name='scraper' class='form-horizontal' ng-submit='submitScrape()'>
 
     <div class='col-xs-10'>
@@ -16,35 +16,83 @@
 
 
 
-<div class='row text-center'>
 
-  <div class='col-sm-8'>
-    <h2 editable-text='recipe.title' onaftersave='updateRecipe()'>{{ recipe.title }}</h2>
-    <h3 editable-text='recipe.author' onaftersave='updateRecipe()'>{{ recipe.author }}</h3>
-    <p editable-text='recipe.description' onaftersave='updateRecipe()'>{{ recipe.description }}</p>
+<div ng-if='owner'>
+
+
+  <div class='row text-center'>
+
+    <div class='col-sm-8'>
+      <h2 editable-text='recipe.title' onaftersave='updateRecipe()'>{{ recipe.title }}</h2>
+      <h3 editable-text='recipe.author' onaftersave='updateRecipe()'>{{ recipe.author }}</h3>
+      <p editable-text='recipe.description' onaftersave='updateRecipe()'>{{ recipe.description }}</p>
+    </div>
+
+    <div class='col-sm-4'>
+      <img src="{{ recipe.photo_url }}" class='img img-responsive'>
+      <button class='btn btn-warning btn-sm' ng-click='deleteRecipe()' ng-if='owner'>Delete Recipe</button>
+    </div>
+
   </div>
 
-  <div class='col-sm-4'>
-    <img src="{{ recipe.photo_url }}" class='img img-responsive'>
-    <button class='btn btn-warning btn-sm' ng-click='deleteRecipe()' ng-if='owner'>Delete Recipe</button>
+
+
+  <div class='row'>
+
+    <div class='col-sm-8'>
+      <h4>Directions</h4>
+      <p ng-repeat='instruction in recipe.instructions' editable-text='instruction.body' onaftersave='updateRecipe()'>{{ instruction.body }}</p>
+    </div>
+
+    <div class='col-sm-4'>
+      <h4>Ingredients</h4>
+      <ul>
+        <li ng-repeat='ingredient in recipe.ingredients' editable-text='ingredient.name' onaftersave='updateRecipe()'>{{ ingredient.name }}</li>
+      </ul>
+    </div>
+
   </div>
+
 
 </div>
 
 
 
-<div class='row'>
 
-  <div class='col-sm-8'>
-    <h4>Directions</h4>
-    <p ng-repeat='instruction in recipe.instructions' editable-text='instruction.body' onaftersave='updateRecipe()'>{{ instruction.body }}</p>
+<div ng-if='owner == false'>
+
+
+  <div class='row text-center'>
+
+    <div class='col-sm-8'>
+      <h2>{{ recipe.title }}</h2>
+      <h3>{{ recipe.author }}</h3>
+      <p>{{ recipe.description }}</p>
+    </div>
+
+    <div class='col-sm-4'>
+      <img src="{{ recipe.photo_url }}" class='img img-responsive'>
+    </div>
+
   </div>
 
-  <div class='col-sm-4'>
-    <h4>Ingredients</h4>
-    <ul>
-      <li ng-repeat='ingredient in recipe.ingredients' editable-text='ingredient.name' onaftersave='updateRecipe()'>{{ ingredient.name }}</li>
-    </ul>
+
+
+  <div class='row'>
+
+    <div class='col-sm-8'>
+      <h4>Directions</h4>
+      <p ng-repeat='instruction in recipe.instructions'>{{ instruction.body }}</p>
+    </div>
+
+    <div class='col-sm-4'>
+      <h4>Ingredients</h4>
+      <ul>
+        <li ng-repeat='ingredient in recipe.ingredients'>{{ ingredient.name }}</li>
+      </ul>
+    </div>
+
   </div>
+
 
 </div>
