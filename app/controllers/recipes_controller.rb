@@ -1,5 +1,17 @@
 class RecipesController < ApplicationController
 
+  def index
+    @recipes = Recipe.where("user_id = ?", current_user.id)
+
+    respond_to do |format|
+      if @recipes
+        format.json { render json: @recipes }
+      else
+        format.json { render nothing: true, status: 404 }
+      end
+    end
+  end
+
   def show
     @recipe = Recipe.where(:id => params[:id])
 

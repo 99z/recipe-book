@@ -8,4 +8,8 @@ recipeBook.controller('userShowCtrl', ['$scope', '$stateParams', 'Restangular', 
       $scope.profile = _.find(profiles, function(p) { return p.user_id == $stateParams.userId; });
     });
 
+    Restangular.all('recipes').getList().then(function(recipes) {
+      $scope.recipes = recipes;
+    });
+
 }]);
