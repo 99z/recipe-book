@@ -6,7 +6,15 @@
       <img src="https://cldup.com/QiXfZQ31vQ.jpg" class="img-responsive">
     </div>
 
-    <div name="profile-info" class="col-xs-8">
+    <div name="profile-info" class="col-xs-8" ng-if="$scope.currentUser.id == $stateParams.userId">
+      <h2 class="text-center"><a href="#" editable-text="profile.first_name" onaftersave="updateProfile()">{{ profile.first_name }}</a> {{ profile.last_name }}</h2>
+      <br />
+      <p class="location"><strong>From: </strong>{{ profile.location }}</p>
+      <br />
+      <p class="recipe-count"><strong>Number of recipes: </strong> {{ recipes.length }}</p>
+    </div>
+
+    <div name="profile-info" class="col-xs-8" ng-if="$scope.currentUser.id != $stateParams.userId">
       <h2 class="text-center">{{ profile.first_name }} {{ profile.last_name }}</h2>
       <br />
       <p class="location"><strong>From: </strong>{{ profile.location }}</p>

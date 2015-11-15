@@ -14,8 +14,8 @@ recipeBook.controller('userShowCtrl', ['$scope', '$stateParams', 'Restangular', 
 
     $scope.viewMode = "thumbnail";
 
-    $scope.test = function() {
-      console.log('test');
-    }
+    $scope.updateProfile = function() {
+      $scope.profile.put();
+    };
 
 }]);
