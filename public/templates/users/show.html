@@ -21,6 +21,7 @@
       <br />
 
       <p class="recipe-count"><strong>Number of recipes: </strong> {{ recipes.length }}</p>
+      <button type="button" class="btn btn-primary" ng-click="deleteAccount()">Delete account?</button>
     </div>
 
     <div name="profile-info" class="col-xs-8" ng-if="$scope.currentUser.id != $stateParams.userId">

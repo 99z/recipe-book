@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
 
   def index
-    @users = User.where("id != ?", current_user.id)
+    # @users = User.where("id != ?", current_user.id)
+    @users = User.all
 
     respond_to do |format|
       if @users
@@ -11,5 +12,17 @@ class UsersController < ApplicationController
       end
     end
   end
-  
+
+  def destroy
+    @user = current_user
+
+    respond_to do |format|
+      if @user.destroy
+        format.json { render json: @user }
+      else
+        format.json { render nothing: true, status: 404 }
+      end
+    end
+  end
+
 end
