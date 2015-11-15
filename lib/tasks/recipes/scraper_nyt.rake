@@ -7,7 +7,7 @@ namespace :recipes do
 
     scraper = Mechanize.new do |agent|
       agent.user_agent_alias = 'Mac Safari'
-      # agent.history_added = Proc.new { sleep 0.5 } # just in case
+      agent.history_added = Proc.new { sleep 0.5 } # just in case
     end
 
     recipe = Recipe.find(args.recipe.id)
@@ -39,8 +39,6 @@ namespace :recipes do
 
 
     recipe.save!
-
-    puts "SCRAPING SCRAPING SCRAPING\nSCRAPING SCRAPING SCRAPING\nSCRAPING SCRAPING SCRAPING"
 
   end
 end
