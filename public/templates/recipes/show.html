@@ -1,4 +1,4 @@
-<div class='row' ng-if='owner'>
+<div class='row' ng-show='owner'>
   <form name='scraper' class='form-horizontal' ng-submit='submitScrape()'>
 
     <div class='col-xs-10'>
@@ -29,7 +29,7 @@
     </div>
 
     <div class='col-sm-4'>
-      <img src="{{ recipe.photo_url }}" class='img img-responsive'>
+      <img ng-src="{{ recipe.photo_url }}" class='img img-responsive'>
       <button class='btn btn-warning btn-sm' ng-click='deleteRecipe()' ng-if='owner'>Delete Recipe</button>
     </div>
 
@@ -71,7 +71,7 @@
     </div>
 
     <div class='col-sm-4'>
-      <img src="{{ recipe.photo_url }}" class='img img-responsive'>
+      <img ng-src="{{ recipe.photo_url }}" class='img img-responsive'>
     </div>
 
   </div>
