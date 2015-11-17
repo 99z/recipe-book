@@ -1,4 +1,4 @@
-recipeBook.controller('recipesCtrl', ['$scope', '$state', 'Restangular', 'Auth', 'recipe', function($scope, $state, Restangular,  Auth, recipe){
+recipeBook.controller('recipesCtrl', ['$scope', '$state', '$window', 'Restangular', 'Auth', 'recipe', function($scope, $state, $window, Restangular,  Auth, recipe){
 
   $scope.recipe = recipe;
 
@@ -36,7 +36,7 @@ recipeBook.controller('recipesCtrl', ['$scope', '$state', 'Restangular', 'Auth',
 
 
   $scope.deleteRecipe = function() {
-    if ($scope.owner) {
+    if ($scope.owner && $window.confirm("Delete this list?")) {
       Restangular.one('recipes', $scope.recipe.id).remove()
         .then( function() {
           $state.go('users.show', {userId: $scope.currentUser.id});
