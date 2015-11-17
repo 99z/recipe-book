@@ -12,7 +12,11 @@ recipeBook.controller('userShowCtrl', ['$scope', '$stateParams', 'Restangular', 
     $scope.recipes = recipes;
   });
 
-  $scope.viewMode = "thumbnail";
+  $scope.viewMode = "list";
+
+  $scope.setViewMode = function(mode) {
+    $scope.viewMode = mode;
+  };
 
   $scope.updateProfile = function() {
     $scope.profile.put();

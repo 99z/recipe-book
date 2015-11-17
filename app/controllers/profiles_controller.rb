@@ -13,7 +13,7 @@ class ProfilesController < ApplicationController
   end
 
   def show
-
+    # return 404 if profile doesn't exist
   end
 
   def update

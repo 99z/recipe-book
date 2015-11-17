@@ -3,12 +3,12 @@
   <div class="row">
 
     <div name="harold" class="col-xs-4">
-      <img src="https://cldup.com/QiXfZQ31vQ.jpg" class="img-responsive">
+      <img ng-src="https://cldup.com/QiXfZQ31vQ.jpg" class="img-responsive">
     </div>
 
     <div name="profile-info" class="col-xs-8" ng-if="$scope.currentUser.id == $stateParams.userId">
       <h2 class="text-center">
-        <a href="#" editable-text="profile.first_name" onaftersave="updateProfile()">{{ profile.first_name }}</a>
+        <a href="#" editable-text="profile.first_name" onaftersave="updateProfile()">{{ profile.first_name }} </a>
         <a href="#" editable-text="profile.last_name" onaftersave="updateProfile()">{{ profile.last_name }}</a>
       </h2>
 
@@ -21,7 +21,7 @@
       <br />
 
       <p class="recipe-count"><strong>Number of recipes: </strong> {{ recipes.length }}</p>
-      <button type="button" class="btn btn-primary" ng-click="deleteAccount()">Delete account?</button>
+      <button type="button" class="btn btn-primary pull-right" ng-click="deleteAccount()">Delete account?</button>
     </div>
 
     <div name="profile-info" class="col-xs-8" ng-if="$scope.currentUser.id != $stateParams.userId">
@@ -51,8 +51,8 @@
 
   <div class="col-xs-3">
     <p class="pull-right" ng-if="$scope.currentUser.id == $stateParams.userId">
-      <a href="#" ng-click="viewMode = 'thumbnail'">thumbnail</a>
-      <a href="#" ng-click="viewMode = 'list'">list</a>
+      <a href ng-click="setViewMode('thumbnail')">thumbnail</a>
+      <a href ng-click="setViewMode('list')">list</a>
     </p>
   </div>
 
@@ -63,7 +63,7 @@
   <div ng-repeat="recipe in recipes" class="col-xs-3 text-center">
 
     <div class="recipe-image">
-      <img class="img-responsive" src="{{ recipe.photo_url }}">
+      <img class="img-responsive" ng-src="{{ recipe.photo_url }}">
       <button class="btn btn-primary view">view</button>
       <button class="btn btn-primary add">add to my book</button>
     </div>

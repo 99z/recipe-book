@@ -21,6 +21,7 @@
 //= require angular-devise
 //= require xeditable
 //= require angular-modal-service
+//= require angular-ui-bootstrap
 //= require angular-confirm
 
 //= require_tree .
