@@ -66,3 +66,7 @@ group :development, :test do
 
   gem 'faker'
 end
+
+# for Bootstrap overrides
+gem 'therubyracer'
+gem 'less-rails'
