@@ -1,0 +1,10 @@
+<%= nav_bar :fixed => :top, :responsive => :true,
+          :brand => "Recipe Book", :brand_link => unauthenticated_root_path do %>
+
+  <%= menu_group :pull => :right do %>
+    <%= menu_item "Sign Up", new_user_registration_path %>
+    <%= menu_item "Log In", new_user_session_path %>
+  <% end %>
+
+
+<% end %>

@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>RecipeBook</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body ng-app="recipeBook">
 
-<%= yield %>
 
-</body>
+  <head>
+    <title>RecipeBook</title>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+
+
+
+  <body ng-app="recipeBook">
+
+
+    <% if user_signed_in? %>
+      <%= render partial: '/shared/navbar' %>
+    <% else %>
+      <%= render partial: '/shared/navbar_guest' %>
+    <% end %>
+
+    <div class='nav-spacer'></div>
+
+    <%= yield %>
+
+  </body>
+
+
 </html>
