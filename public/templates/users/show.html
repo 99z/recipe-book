@@ -4,6 +4,12 @@
 
     <div name="harold" class="col-xs-4">
       <img ng-src="https://cldup.com/QiXfZQ31vQ.jpg" class="img-responsive">
+
+      <form name='avatarForm'>
+        <input type="file" file-upload>
+        <input type='submit' value="Upload!">
+      </form>
+
     </div>
 
     <div name="profile-info" class="col-xs-8" ng-if="$scope.currentUser.id == $stateParams.userId">

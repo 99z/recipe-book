@@ -19,6 +19,7 @@ recipeBook.controller('userShowCtrl', ['$scope', '$stateParams', 'Restangular', 
   };
 
   $scope.updateProfile = function() {
+    console.log($scope.profile.id);
     $scope.profile.put();
   };
 
@@ -28,5 +29,7 @@ recipeBook.controller('userShowCtrl', ['$scope', '$stateParams', 'Restangular', 
       user.remove();
     });
   };
+
+
 
 }]);
