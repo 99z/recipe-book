@@ -36,6 +36,11 @@ end
 # bootstrap
 gem "twitter-bootstrap-rails"
 
+# paperclip
+gem 'paperclip'
+gem 'aws-sdk'
+gem 'figaro'
+
 # Use jquery as the JavaScript library
 # gem 'jquery-rails'
 # gem 'jquery-ui-rails'
