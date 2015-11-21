@@ -1,14 +1,59 @@
-<div class="login-container container">
-  <h1>Login</h1>
-  <a href="/users/sign_up"><em>...or sign up</em></a>
-  <div class="input-group">
-    <br>
-    <input type="text" class="form-control" placeholder="Email" ng-model='credentials.email'>
-    <br>
-    <input type="password" class="form-control" placeholder="Password" ng-model='credentials.password'>
-    <br>
-    <input type="password" class="form-control" placeholder="Password Confirmation" ng-model='credentials.password_confirmation'>
-    <br>
-    <button class="btn btn-primary" ng-click="login()">Login</button>
+<div class="login-container container-fluid">
+  <div class="bg"></div>
+
+  <div class="jumbotron text-center">
+    <br />
+    <br />
+    <br /> <!-- lazy centering -->
+
+    <h1>Recipe Book</h1>
+    <p class="lead">Welcome to it</p>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 text-center call-to-action">
+      <h2><em>Keep all your recipes in one place!</em></h2>
+      <h4>Supported sites:</h4>
+
+      <div class="row supported-sites">
+        <div class="col-xs-4 supported-site">
+          <img ng-src="/images/nyt.png" class="img-responsive center-block">
+        </div>
+
+        <div class="col-xs-4 supported-site">
+          <img ng-src="/images/food.png" class="img-responsive center-block">
+        </div>
+
+        <div class="col-xs-4 supported-site">
+          <img ng-src="/images/epi.png" class="img-responsive center-block">
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="container">
+
+    <div class="row">
+
+      <div class="col-xs-6 text-center">
+        <h1>Sign up now</h1>
+        <h2><em>or</em></h2>
+        <br />
+        <a href="/#/sign_in" class="btn btn-primary">Sign in</a>
+      </div>
+
+      <div class="col-xs-6 text-center">
+        <h1>No SSN required!</h1>
+        <input type="text" class="form-control" placeholder="Email" ng-model='credentials.email'>
+        <br />
+        <input type="password" class="form-control" placeholder="Password" ng-model='credentials.password'>
+        <br />
+        <input type="password" class="form-control" placeholder="Password Confirmation" ng-model='credentials.password_confirmation'>
+        <br>
+        <button class="btn btn-primary" ng-click="signup()">Let's go!</button>
+      </div>
+
+    </div>
   </div>
 </div>

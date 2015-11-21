@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   scope :api do
     scope :v1 do
-      resources :users, only: [:index, :destroy]
+      resources :users, only: [:index, :destroy, :show]
       resources :recipes, only: [:create, :show, :index, :update, :destroy]
       resources :profiles
     end

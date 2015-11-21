@@ -1,0 +1,30 @@
+<div class="login-container container-fluid">
+  <div class="bg"></div>
+
+  <div class="jumbotron text-center">
+    <br />
+    <br />
+    <br /> <!-- lazy centering -->
+
+    <h1>Recipe Book</h1>
+    <p class="lead">Welcome to it</p>
+  </div>
+
+  <div class="row">
+
+    <div class="col-xs-12 text-center sign-in">
+      <div class="col-xs-12 text-center">
+        <h1>Sign in to your account</h1>
+        <input type="text" class="form-control" placeholder="Email" ng-model='credentials.email'>
+        <br />
+        <input type="password" class="form-control" placeholder="Password" ng-model='credentials.password'>
+        <br />
+        <input type="password" class="form-control" placeholder="Password Confirmation" ng-model='credentials.password_confirmation'>
+        <br>
+        <button class="btn btn-primary" ng-click="login()">We missed you!</button>
+      </div>
+    </div>
+
+  </div>
+
+</div>
