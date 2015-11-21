@@ -37,21 +37,13 @@ class RecipesController < ApplicationController
     if @recipe
       respond_to do |format|
         format.json { render json: @recipe.to_json(:include => [:instructions, :ingredients]), status: 200 }
-
-        # this should be moved out of the api controller
-        # would require namespacing all the api controllers
-        format.html do
-          if params[:method] == 'print'
-            render :show_print
-          else
-            render :show
-          end
-        end
+        format.pdf { render pdf: "recipe", layout: "pdf.html.erb", encoding: 'utf8' }
       end
 
     else
       respond_to do |format|
         format.json { render nothing: true, status: 404 }
+        format.pdf { render nothing: true, status: 404 }
       end
     end
 

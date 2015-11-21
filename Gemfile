@@ -75,3 +75,7 @@ end
 # for Bootstrap overrides
 gem 'therubyracer'
 gem 'less-rails'
+
+# for generating PDFs
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'

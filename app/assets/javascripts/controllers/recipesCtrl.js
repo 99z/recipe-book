@@ -51,9 +51,8 @@ recipeBook.controller('recipesCtrl', ['$scope', '$state', '$window', 'Restangula
   };
 
 
-  // could this just generate PDF?
   $scope.printRecipe = function() {
-    var printWindow = $window.open('/api/v1/recipes/'+$scope.recipe.id+'.html?method=print', '_blank');
+    var printWindow = $window.open('/api/v1/recipes/'+$scope.recipe.id+'.pdf');
     printWindow.print()
   }
 
