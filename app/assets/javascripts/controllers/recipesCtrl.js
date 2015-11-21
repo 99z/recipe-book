@@ -45,4 +45,10 @@ recipeBook.controller('recipesCtrl', ['$scope', '$state', '$window', 'Restangula
   };
 
 
+  $scope.printRecipe = function() {
+    var printWindow = $window.open('/api/v1/recipes/'+$scope.recipe.id+'.html?method=print', '_blank');
+    printWindow.print()
+  }
+
+
 }]);
