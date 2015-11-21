@@ -1,3 +1,19 @@
+<div class='row recipe-controls'>
+
+  <div class='col-xs-12 text-right'>
+    <button href class='btn btn-primary'>
+      <span class='glyphicon glyphicon-print'></span>
+    </button>
+
+    <button class='btn btn-danger' ng-click='deleteRecipe()' ng-if='owner'>
+      <span class='glyphicon glyphicon-trash'></span>
+    </button>
+
+  </div>
+</div>
+
+
+
 <div class='row' ng-show='owner'>
   <form name='scraper' class='form-horizontal' ng-submit='submitScrape()'>
 
@@ -30,7 +46,7 @@
 
     <div class='col-sm-4'>
       <img ng-src="{{ recipe.photo_url }}" class='img img-responsive'>
-      <button class='btn btn-warning btn-sm' ng-click='deleteRecipe()' ng-if='owner'>Delete Recipe</button>
+      
     </div>
 
   </div>
