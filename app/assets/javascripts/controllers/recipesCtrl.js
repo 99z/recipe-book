@@ -36,7 +36,7 @@ recipeBook.controller('recipesCtrl', ['$scope', '$state', '$window', 'Restangula
 
 
   $scope.deleteRecipe = function() {
-    if ($scope.owner && $window.confirm("Delete this list?")) {
+    if ($scope.owner && $window.confirm("Delete this recipe?")) {
       Restangular.one('recipes', $scope.recipe.id).remove()
         .then( function() {
           $state.go('users.show', {userId: $scope.currentUser.id});
@@ -45,6 +45,7 @@ recipeBook.controller('recipesCtrl', ['$scope', '$state', '$window', 'Restangula
   };
 
 
+  // could this just generate PDF?
   $scope.printRecipe = function() {
     var printWindow = $window.open('/api/v1/recipes/'+$scope.recipe.id+'.html?method=print', '_blank');
     printWindow.print()
