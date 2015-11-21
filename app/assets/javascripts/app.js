@@ -20,6 +20,12 @@ recipeBook.config(function($stateProvider, $urlRouterProvider) {
       controller: "homeCtrl"
     })
 
+    .state('sign_in', {
+      url: "/sign_in",
+      templateUrl: "/templates/sign_in.html",
+      controller: "signinCtrl"
+    })
+
     .state('dashboard', {
       url: "/dashboard",
       templateUrl: "/templates/dashboard/dashboard.html"
@@ -54,7 +60,11 @@ recipeBook.config(function($stateProvider, $urlRouterProvider) {
     .state('users.show', {
       url: "/:userId",
       templateUrl: "/templates/users/show.html",
-      controller: "userShowCtrl"
+      controller: "userShowCtrl",
+      resolve: {
+        user: ['Restangular', '$stateParams', function(Restangular, $stateParams){
+          return Restangular.one('users', $stateParams.userId).get();
+        }]}
     });
 
 });

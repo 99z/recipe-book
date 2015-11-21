@@ -25,4 +25,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    @user = User.where("id == ?", params[:id])
+
+    respond_to do |format|
+      if @user
+        format.json { render json: @user }
+      else
+        format.json { render nothing: true, status: 404 }
+      end
+    end
+  end
+
 end

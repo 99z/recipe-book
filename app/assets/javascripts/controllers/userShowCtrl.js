@@ -1,8 +1,13 @@
-recipeBook.controller('userShowCtrl', ['$scope', '$stateParams', 'Restangular', 'Auth', function($scope, $stateParams, Restangular, Auth){
+recipeBook.controller('userShowCtrl', ['$scope', '$stateParams', 'Restangular', 'Auth', 'user', function($scope, $stateParams, Restangular, Auth, user){
+
+  $scope.user = user;
 
   Auth.currentUser().then(function(user) {
     $scope.currentUser = user;
+    $scope.currentUserID = user.id;
   });
+
+  $scope.currentProfileID = $stateParams.userId;
 
   Restangular.all('profiles').getList().then(function(profiles) {
     $scope.profile = _.find(profiles, function(p) { return p.user_id == $stateParams.userId; });
@@ -13,6 +18,8 @@ recipeBook.controller('userShowCtrl', ['$scope', '$stateParams', 'Restangular', 
   });
 
   $scope.viewMode = "thumbnail";
+  $scope.sortType = "title";
+  $scope.sortReverse = "false";
 
   $scope.setViewMode = function(mode) {
     $scope.viewMode = mode;

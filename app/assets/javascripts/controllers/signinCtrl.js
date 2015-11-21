@@ -1,22 +1,22 @@
-recipeBook.controller('homeCtrl', ['$scope', 'Restangular', 'Auth', '$location', function($scope, Restangular, Auth, $location){
+recipeBook.controller('signinCtrl', ['$scope', 'Restangular', 'Auth', '$location', function($scope, Restangular, Auth, $location){
 
   $scope.credentials = {};
 
-  $scope.signup = function() {
+  $scope.login = function() {
     var config = {
       headers: {
         'X-HTTP-Method-Override': 'POST'
       }
     };
 
-    Auth.register($scope.credentials).then(function(user) {
+    Auth.login($scope.credentials).then(function(user) {
       // console.log(user);
     }, function(error) {
       //auth failed
     });
   };
 
-  $scope.$on('devise:new-registration', function(event, currentUser){
+  $scope.$on('devise:login', function(event, currentUser){
     $location.path("/dashboard/index");
   });
 
