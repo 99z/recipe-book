@@ -1,113 +1,130 @@
-<div class='row recipe-controls'>
+<main id='recipe'>
 
-  <div class='col-xs-12 text-right'>
-    <button href class='btn btn-primary' ng-click='printRecipe()'>
-      <span class='glyphicon glyphicon-print'></span>
-    </button>
+  <div class='recipe-controls'>
 
-    <button class='btn btn-danger' ng-click='deleteRecipe()' ng-if='owner'>
-      <span class='glyphicon glyphicon-trash'></span>
-    </button>
+    <div class='row control-buttons'>
 
-  </div>
-</div>
+      <div class='col-xs-6 pull-left' ng-hide='scraperActive'>
+        <button class='btn btn-primary' ng-click="toggleScraper()">
+          Import URL
+        </button>
+      </div>
 
+      <div class='col-xs-6 pull-right text-right'>
+        <button class='btn' ng-click='printRecipe()'>
+          <span class='glyphicon glyphicon-print'></span>
+        </button>
 
+        <button class='btn btn-danger' ng-click='deleteRecipe()' ng-if='owner'>
+          <span class='glyphicon glyphicon-trash'></span>
+        </button>
 
-<div class='row' ng-show='owner'>
-  <form name='scraper' class='form-horizontal' ng-submit='submitScrape()'>
-
-    <div class='col-xs-10'>
-      <div class='form-group'>
-        <input type="text" placeholder='Enter a URL to import...' class='form-control' ng-model='scraper.url'>
       </div>
     </div>
 
-    <div class='col-xs-2'>
-      <input type="submit" class='btn btn-block' value='Import!'>
-    </div>
 
-  </form>
-</div>
+    <div class='row' ng-show="owner && scraperActive">
 
+      <form name='scraper' class='form-horizontal' ng-submit='submitScrape()'>
 
+        <div class='col-xs-10'>
+          <div class='form-group'>
+            <input type="text" placeholder='Enter a URL to import...' class='form-control' ng-model='scraper.url'>
+          </div>
+        </div>
 
+        <div class='col-xs-2'>
+          <input type="submit" class='btn btn-block btn-primary' value='Import!'>
+        </div>
 
-<div ng-if='owner'>
+      </form>
 
+      <div class='col-xs-12'>
+        <a href ng-click='toggleScraper()'>Cancel</a>
+      </div>
 
-  <div class='row text-center'>
-
-    <div class='col-sm-8'>
-      <h2 editable-text='recipe.title' onaftersave='updateRecipe()'>{{ recipe.title }}</h2>
-      <h3 editable-text='recipe.author' onaftersave='updateRecipe()'>{{ recipe.author }}</h3>
-      <p editable-text='recipe.description' onaftersave='updateRecipe()'>{{ recipe.description }}</p>
-    </div>
-
-    <div class='col-sm-4'>
-      <img ng-src="{{ recipe.photo_url }}" class='img img-responsive'>
-    </div>
-
-  </div>
-
-
-
-  <div class='row'>
-
-    <div class='col-sm-8'>
-      <h4>Directions</h4>
-      <p ng-repeat='instruction in recipe.instructions' editable-text='instruction.body' onaftersave='updateRecipe()'>{{ instruction.body }}</p>
-    </div>
-
-    <div class='col-sm-4'>
-      <h4>Ingredients</h4>
-      <ul>
-        <li ng-repeat='ingredient in recipe.ingredients' editable-text='ingredient.name' onaftersave='updateRecipe()'>{{ ingredient.name }}</li>
-      </ul>
     </div>
 
   </div>
 
 
-</div>
+  <div ng-if='owner'>
 
 
+    <div class='row text-center'>
 
+      <div class='col-sm-8'>
+        <h2 class='edit-field' editable-textarea='recipe.title' e-rows="1" e-cols="60" onaftersave='updateRecipe()'>{{ recipe.title }}</h2>
+        <h3 editable-textarea='recipe.author' e-rows="1" e-cols="40" onaftersave='updateRecipe()'>{{ recipe.author }}</h3>
+        <p editable-textarea='recipe.description' e-rows="4" e-cols="90"  onaftersave='updateRecipe()'>{{ recipe.description }}</p>
+      </div>
 
-<div ng-if='owner == false'>
+      <div class='col-sm-4'>
+        <img ng-src="{{ recipe.photo_url }}" class='img img-responsive'>
+      </div>
 
-
-  <div class='row text-center'>
-
-    <div class='col-sm-8'>
-      <h2>{{ recipe.title }}</h2>
-      <h3>{{ recipe.author }}</h3>
-      <p>{{ recipe.description }}</p>
     </div>
 
-    <div class='col-sm-4'>
-      <img ng-src="{{ recipe.photo_url }}" class='img img-responsive'>
+
+
+    <div class='row'>
+
+      <div class='col-sm-8'>
+        <h4>Directions</h4>
+        <p ng-repeat='instruction in recipe.instructions' editable-textarea='instruction.body' e-rows="4" e-cols="90" onaftersave='updateRecipe()'>{{ instruction.body }}</p>
+      </div>
+
+      <div class='col-sm-4'>
+        <h4>Ingredients</h4>
+        <ul>
+          <li ng-repeat='ingredient in recipe.ingredients' editable-textarea='ingredient.name' e-rows="1" e-cols="30" onaftersave='updateRecipe()'>{{ ingredient.name }}</li>
+        </ul>
+      </div>
+
     </div>
+
 
   </div>
 
 
 
-  <div class='row'>
 
-    <div class='col-sm-8'>
-      <h4>Directions</h4>
-      <p ng-repeat='instruction in recipe.instructions'>{{ instruction.body }}</p>
+  <div ng-if='owner == false'>
+
+
+    <div class='row text-center'>
+
+      <div class='col-sm-8'>
+        <h2>{{ recipe.title }}</h2>
+        <h3>{{ recipe.author }}</h3>
+        <p>{{ recipe.description }}</p>
+      </div>
+
+      <div class='col-sm-4'>
+        <img ng-src="{{ recipe.photo_url }}" class='img img-responsive'>
+      </div>
+
     </div>
 
-    <div class='col-sm-4'>
-      <h4>Ingredients</h4>
-      <ul>
-        <li ng-repeat='ingredient in recipe.ingredients'>{{ ingredient.name }}</li>
-      </ul>
+
+
+    <div class='row'>
+
+      <div class='col-sm-8'>
+        <h4>Directions</h4>
+        <p ng-repeat='instruction in recipe.instructions'>{{ instruction.body }}</p>
+      </div>
+
+      <div class='col-sm-4'>
+        <h4>Ingredients</h4>
+        <ul>
+          <li ng-repeat='ingredient in recipe.ingredients'>{{ ingredient.name }}</li>
+        </ul>
+      </div>
+
     </div>
+
 
   </div>
 
-
-</div>
+</main>
