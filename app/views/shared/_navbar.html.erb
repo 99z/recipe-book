@@ -3,13 +3,13 @@
 
 
   <%= menu_group :pull => :right do %>
-    <%= menu_item "#{current_user.email}", "#" %>
+    <%= menu_item "#{current_user.email}", "#/users/#{current_user.id}" %>
     <%= menu_item "Log Out", destroy_user_session_path, :method => :delete %>
   <% end %>
 
 
   <%= menu_group :pull => :right do %>
-    <%= link_to '#' do %>
+    <%= link_to "#/users/#{current_user.id}" do %>
       <%= image_tag('https://cldup.com/QiXfZQ31vQ.jpg', class: "img img-thumbnail") %>
     <% end %>
   <% end %>
