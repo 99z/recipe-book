@@ -1,6 +1,7 @@
-recipeBook.controller('signinCtrl', ['$scope', 'Restangular', 'Auth', '$location', function($scope, Restangular, Auth, $location){
+recipeBook.controller('signinCtrl', ['$scope', 'Restangular', 'Auth', '$location', '$http', function($scope, Restangular, Auth, $location, $http){
 
   $scope.credentials = {};
+  $scope.recover = false;
 
   $scope.login = function() {
     var config = {
@@ -30,5 +31,16 @@ recipeBook.controller('signinCtrl', ['$scope', 'Restangular', 'Auth', '$location
   $(window).scroll(function(e) {
     parallax();
   });
+
+
+  $scope.toggleRecover = function() {
+    $scope.recover = !$scope.recover;
+  }
+
+  $scope.resetPassword = function() {
+    $http.post("/users/password",
+      {"user": $scope.credentials}
+    ).then( $scope.recover = false );
+  }
 
 }]);
