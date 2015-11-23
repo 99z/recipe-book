@@ -82,19 +82,21 @@
 
 </div>
 
-<div ng-if="viewMode == 'thumbnail'" class="row">
+<div ng-if="viewMode == 'thumbnail'" class="row recipes">
 
-  <div ng-repeat="recipe in recipes | filter:filterText | orderBy:sortType:sortReverse" class="col-xs-3 text-center">
+  <div ng-repeat="recipe in recipes | filter:filterText | orderBy:sortType:sortReverse" class="item">
 
-    <div class="recipe-image">
-      <img class="img-responsive" ng-src="{{ recipe.photo_url }}">
-      <a href="/#/recipes/{{recipe.id}}" class="btn btn-primary view">view</a>
-      <a class="btn btn-primary add">add to my book</a>
+    <div class="well">
+      <div class="recipe-img">
+        <img class="img-responsive" ng-src="{{ recipe.photo_url }}">
+        <a href="/#/recipes/{{recipe.id}}" class="btn btn-primary view">view</a>
+        <a href class="btn btn-primary add">add to my book</a>
+      </div>
+
+      <p><strong>{{ recipe.title }}</strong> by {{ recipe.author }}</p>
+      <p>ADD RECIPE ORIGIN ATTRIBUTE HERE!</p>
+      <p>Difficulty - length - rating</p>
     </div>
-
-    <p><strong>{{ recipe.title }}</strong> by {{ recipe.author }}</p>
-    <p>ADD RECIPE ORIGIN ATTRIBUTE HERE!</p>
-    <p>Difficulty - length - rating</p>
   </div>
 
 </div>
