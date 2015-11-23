@@ -54,22 +54,22 @@ div.recipe-image:hover img{
   opacity:0.5;
 }
 
-div.recipe-image:hover button {
+div.recipe-image:hover .btn {
   display: block;
 }
 
-div.recipe-image button {
+div.recipe-image .btn {
   position:absolute;
   display:none;
 }
 
-div.recipe-image button.view {
+div.recipe-image .btn.view {
   top: 50%;
   left: 50%;
 	transform: translate(-50%, -50%);
 }
 
-div.recipe-image button.add {
+div.recipe-image .btn.add {
 	top: 75%;
 	left: 50%;
 	transform: translate(-50%, -75%);

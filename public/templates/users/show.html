@@ -43,7 +43,7 @@
 
 <div class="row">
 
-  <div class="col-xs-3">
+  <div class="col-xs-4">
     <p ng-if="currentUser.id == currentProfileID">
       <a href="/#/recipes/new">+ Add a recipe</a>
     </p>
@@ -51,25 +51,33 @@
     <label>Search: <input ng-model="filterText"></label>
   </div>
 
-  <div class="col-xs-6 text-center">
+  <div class="col-xs-4 text-center">
     <h1>{{ profile.first_name }}'s Recipes</h1>
-
-    <h3>Sort by:</h3>
-    <a href ng-click="sortType = 'title'; sortReverse = !sortReverse">title</a>
-    <a href ng-click="sortType = 'author'; sortReverse = !sortReverse">author</a>
-    <a href ng-click="sortType = 'origin'; sortReverse = !sortReverse">origin</a>
-    <a href ng-click="sortType = 'difficulty'; sortReverse = !sortReverse">difficulty</a>
-    <a href ng-click="sortType = 'rating'; sortReverse = !sortReverse">rating</a>
-
     <br />
     <br />
   </div>
 
-  <div class="col-xs-3">
-    <p class="pull-right" ng-if="$scope.currentUser.id == $stateParams.userId">
+  <div class="col-xs-4">
+    <p class="pull-right">
       <a href ng-click="setViewMode('thumbnail')">thumbnail</a>
       <a href ng-click="setViewMode('list')">list</a>
     </p>
+
+    <br />
+
+    <div class="row">
+      <div class="col-xs-12">
+        <p class="pull-right">
+          <strong>Sort by:</strong>
+
+          <a href ng-click="sortType = 'title'; sortReverse = !sortReverse">title</a>
+          <a href ng-click="sortType = 'author'; sortReverse = !sortReverse">author</a>
+          <a href ng-click="sortType = 'origin'; sortReverse = !sortReverse">origin</a>
+          <a href ng-click="sortType = 'difficulty'; sortReverse = !sortReverse">difficulty</a>
+          <a href ng-click="sortType = 'rating'; sortReverse = !sortReverse">rating</a>
+        </p>
+      </div>
+    </div>
   </div>
 
 </div>
@@ -80,8 +88,8 @@
 
     <div class="recipe-image">
       <img class="img-responsive" ng-src="{{ recipe.photo_url }}">
-      <button class="btn btn-primary view">view</button>
-      <button class="btn btn-primary add">add to my book</button>
+      <a href="/#/recipes/{{recipe.id}}" class="btn btn-primary view">view</a>
+      <a class="btn btn-primary add">add to my book</a>
     </div>
 
     <p><strong>{{ recipe.title }}</strong> by {{ recipe.author }}</p>
