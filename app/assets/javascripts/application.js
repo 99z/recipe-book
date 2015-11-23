@@ -23,5 +23,6 @@
 //= require angular-modal-service
 //= require angular-ui-bootstrap
 //= require angular-confirm
+//= require ng-file-upload-all.min
 
 //= require_tree .

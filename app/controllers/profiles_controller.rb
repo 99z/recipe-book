@@ -5,7 +5,7 @@ class ProfilesController < ApplicationController
 
     respond_to do |format|
       if @profiles
-        format.json { render json: @profiles }
+        format.json { render json: @profiles.to_json(methods: :avatar) }
       else
         format.json { render nothing: true, status: 404 }
       end
@@ -21,7 +21,7 @@ class ProfilesController < ApplicationController
 
     respond_to do |format|
       if @profile.update(whitelisted_profile_params)
-        format.json { render json: @profile }
+        format.json { render json: @profile.to_json(methods: :avatar) }
       else
         format.json { render nothing: true, status: 404 }
       end

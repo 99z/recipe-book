@@ -1,4 +1,4 @@
-recipeBook.controller('userShowCtrl', ['$scope', '$stateParams', 'Restangular', 'Auth', 'user', function($scope, $stateParams, Restangular, Auth, user){
+recipeBook.controller('userShowCtrl', ['$scope', '$stateParams', 'Restangular', 'Auth', 'user', '$http', function($scope, $stateParams, Restangular, Auth, user, $http){
 
   $scope.user = user;
 
@@ -26,7 +26,7 @@ recipeBook.controller('userShowCtrl', ['$scope', '$stateParams', 'Restangular', 
   };
 
   $scope.updateProfile = function() {
-    console.log($scope.profile.id);
+    console.log($scope.profile);
     $scope.profile.put();
   };
 
@@ -36,6 +36,24 @@ recipeBook.controller('userShowCtrl', ['$scope', '$stateParams', 'Restangular', 
       user.remove();
     });
   };
+
+
+  $scope.uploadFile = function(files) {
+    var fd = new FormData();
+    fd.append('profile[avatar]', files[0]);
+    $http.put("/api/v1/profiles/"+$scope.profile.id+".json",
+              fd, {
+                withCredentials: true,
+                headers: {
+                  'Content-Type': undefined,
+                  'X-CSRF-Token': $('meta[name=csrf-token]').attr('content')
+                },
+                transformRequest: angular.identity
+              }
+    ).then(function(response) {
+        $scope.profile.avatar = response.data.avatar;
+    });
+  }
 
 
 
