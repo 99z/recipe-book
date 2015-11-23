@@ -24,7 +24,7 @@ recipeBook.controller('homeCtrl', ['$scope', 'Restangular', 'Auth', '$location',
 
   parallax = function() {
     var scrolled = $(window).scrollTop();
-    $('.bg').css('height', (jumboHeight-scrolled) + 'px');
+    $('.bg').css('height', (jumboHeight-scrolled + 100) + 'px');
   }
 
   $(window).scroll(function(e) {
