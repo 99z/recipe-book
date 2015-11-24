@@ -1,4 +1,4 @@
-recipeBook.controller('userShowCtrl', ['$scope', '$stateParams', 'Restangular', 'Auth', 'user', '$http', function($scope, $stateParams, Restangular, Auth, user, $http){
+recipeBook.controller('userShowCtrl', ['$scope', '$location', '$stateParams', 'Restangular', 'Auth', 'user', '$http', function($scope, $location, $stateParams, Restangular, Auth, user, $http){
 
   $scope.user = user;
 
@@ -34,6 +34,12 @@ recipeBook.controller('userShowCtrl', ['$scope', '$stateParams', 'Restangular', 
     Restangular.all('users').getList().then(function(users) {
       user = _.find(users, function(u) { return u.id == $scope.currentUser.id; });
       user.remove();
+    });
+  };
+
+  $scope.newRecipe = function() {
+    Restangular.all('recipes').post().then(function(recipe) {
+      $location.path('recipes/' + recipe.id);
     });
   };
 
