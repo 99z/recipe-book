@@ -37,7 +37,7 @@ recipeBook.controller('recipesCtrl', ['$scope', '$state', '$window', 'Restangula
       recipeNested['recipe']['instructions_attributes'] = $scope.recipe.instructions;
 
       Restangular.one('recipes', $scope.recipe.id).patch(recipeNested);
-    };
+    }
   };
 
 
@@ -46,15 +46,15 @@ recipeBook.controller('recipesCtrl', ['$scope', '$state', '$window', 'Restangula
       Restangular.one('recipes', $scope.recipe.id).remove()
         .then( function() {
           $state.go('users.show', {userId: $scope.currentUser.id});
-        })
-    };
+        });
+    }
   };
 
 
   $scope.printRecipe = function() {
     var printWindow = $window.open('/api/v1/recipes/'+$scope.recipe.id+'.pdf');
-    printWindow.print()
-  }
+    printWindow.print();
+  };
 
 
 }]);
