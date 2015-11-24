@@ -9,7 +9,7 @@ recipeBook.config(['RestangularProvider', function(RestangularProvider) {
   RestangularProvider.setRequestSuffix('.json');
 }]);
 
-recipeBook.config(function($stateProvider, $urlRouterProvider) {
+recipeBook.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
   $urlRouterProvider.otherwise("/");
 
@@ -67,4 +67,4 @@ recipeBook.config(function($stateProvider, $urlRouterProvider) {
         }]}
     });
 
-});
+}]);

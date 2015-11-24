@@ -26,7 +26,7 @@ recipeBook.controller('signinCtrl', ['$scope', 'Restangular', 'Auth', '$location
   parallax = function() {
     var scrolled = $(window).scrollTop();
     $('.bg').css('height', (jumboHeight-scrolled) + 'px');
-  }
+  };
 
   $(window).scroll(function(e) {
     parallax();
@@ -35,12 +35,12 @@ recipeBook.controller('signinCtrl', ['$scope', 'Restangular', 'Auth', '$location
 
   $scope.toggleRecover = function() {
     $scope.recover = !$scope.recover;
-  }
+  };
 
   $scope.resetPassword = function() {
     $http.post("/users/password",
       {"user": $scope.credentials}
     ).then( $scope.recover = false );
-  }
+  };
 
 }]);

@@ -53,7 +53,7 @@ recipeBook.controller('userShowCtrl', ['$scope', '$stateParams', 'Restangular', 
     ).then(function(response) {
         $scope.profile.avatar = response.data.avatar;
     });
-  }
+  };
 
 
 

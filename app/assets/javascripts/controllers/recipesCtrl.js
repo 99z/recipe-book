@@ -10,13 +10,13 @@ recipeBook.controller('recipesCtrl', ['$scope', '$state', '$window', 'Restangula
 
 
   $scope.checkOwner = function(user) {
-    return $scope.recipe.user_id === user.id
+    return $scope.recipe.user_id === user.id;
   };
 
 
   $scope.toggleScraper = function() {
     $scope.scraperActive = !$scope.scraperActive;
-  }
+  };
 
 
   $scope.submitScrape = function() {
@@ -24,17 +24,17 @@ recipeBook.controller('recipesCtrl', ['$scope', '$state', '$window', 'Restangula
       Restangular.one('recipes', $scope.recipe.id).patch($scope.scraper)
         .then(function(response){
           $scope.recipe = response;
-      })
-    };
+      });
+    }
   };
 
 
   $scope.updateRecipe = function() {
     if ($scope.owner) {
-      var recipeNested = {}
-      recipeNested['recipe'] = $scope.recipe
-      recipeNested['recipe']['ingredients_attributes'] = $scope.recipe.ingredients
-      recipeNested['recipe']['instructions_attributes'] = $scope.recipe.instructions
+      var recipeNested = {};
+      recipeNested['recipe'] = $scope.recipe;
+      recipeNested['recipe']['ingredients_attributes'] = $scope.recipe.ingredients;
+      recipeNested['recipe']['instructions_attributes'] = $scope.recipe.instructions;
 
       Restangular.one('recipes', $scope.recipe.id).patch(recipeNested);
     };
