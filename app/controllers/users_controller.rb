@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.where("id == ?", params[:id])[0]
+    @user = User.where(:id => params[:id])[0]
 
     respond_to do |format|
       if @user
