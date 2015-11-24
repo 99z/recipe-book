@@ -17,7 +17,7 @@
 /tmp
 
 # Ignore gemfile lock
-/Gemfile.lock
+# /Gemfile.lock
 
 # Ignore application configuration
 /config/application.yml
