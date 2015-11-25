@@ -25,6 +25,17 @@ NYT_RECIPE_URLS = [
   "http://cooking.nytimes.com/recipes/1017700-meatballs-with-any-meat"
 ]
 
+EPI_RECIPE_URLS = [
+  "http://www.epicurious.com/recipes/food/views/spiced-sweet-potato-and-parsnip-tian",
+  "http://www.epicurious.com/recipes/food/views/pretzel-rolls-1107",
+  "http://www.epicurious.com/recipes/food/views/caramel-chicken-51193220",
+  "http://www.epicurious.com/recipes/food/views/peanut-and-scallion-relish-51224040",
+  "http://www.epicurious.com/recipes/food/views/extra-buttery-mashed-spuds-51255540",
+  "http://www.epicurious.com/recipes/food/views/spicy-shellfish-and-sausage-stew-108560"
+]
+
+ALL_URLS = NYT_RECIPE_URLS + EPI_RECIPE_URLS
+
 
 
 # Build test users
@@ -52,8 +63,15 @@ end
 
 def scrape(recipe)
   # should not need to sleep here because that's included in Rake task
-  Rake::Task['recipes:scrape_nyt'].invoke(recipe)
-  Rake::Task['recipes:scrape_nyt'].reenable
+  site = URI.parse(recipe.url).host
+
+  if site == "cooking.nytimes.com"
+    Rake::Task['recipes:scrape_nyt'].invoke(recipe)
+    Rake::Task['recipes:scrape_nyt'].reenable
+  elsif site == "www.epicurious.com"
+    Rake::Task['recipes:scrape_epicurious'].invoke(recipe)
+    Rake::Task['recipes:scrape_epicurious'].reenable
+  end
 end
 
 
@@ -61,7 +79,7 @@ end
 User.all.each do |user|
 
   (rand(2..4)*SEED_MULTIPLER).times do
-    recipe = user.recipes.create(:url => NYT_RECIPE_URLS.sample)
+    recipe = user.recipes.create(:url => ALL_URLS.sample)
     scrape(recipe)
   end
 
