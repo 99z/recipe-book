@@ -55,8 +55,15 @@ class RecipesController < ApplicationController
 
     if @recipe.update(recipe_params)
       if params['$name'] === 'scraper'
-        Rake::Task['recipes:scrape_nyt'].invoke(@recipe)
-        Rake::Task['recipes:scrape_nyt'].reenable
+        site = URI.parse(params[:url]).host
+
+        if site == "cooking.nytimes.com"
+          Rake::Task['recipes:scrape_nyt'].invoke(@recipe)
+          Rake::Task['recipes:scrape_nyt'].reenable
+        elsif site == "www.epicurious.com"
+          Rake::Task['recipes:scrape_epicurious'].invoke(@recipe)
+          Rake::Task['recipes:scrape_epicurious'].reenable
+        end
         @recipe = Recipe.where(:id => params[:id])[0]
       end
 
