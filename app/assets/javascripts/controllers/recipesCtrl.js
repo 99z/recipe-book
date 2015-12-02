@@ -1,7 +1,6 @@
 recipeBook.controller('recipesCtrl', ['$scope', '$state', '$window', 'Restangular', 'Auth', 'recipe', function($scope, $state, $window, Restangular,  Auth, recipe){
 
   $scope.recipe = recipe;
-  console.log($scope.recipe);
   $scope.scraperActive = false;
 
   Auth.currentUser().then( function(user) {
@@ -56,6 +55,16 @@ recipeBook.controller('recipesCtrl', ['$scope', '$state', '$window', 'Restangula
     var printWindow = $window.open('/api/v1/recipes/'+$scope.recipe.id+'.pdf');
     printWindow.print();
   };
+
+
+  $scope.noteCount = function(notable) {
+    var count = notable.notes.length;
+    var text = "notes"
+    if (count == 1) {
+      var text = "note"
+    };
+    return count + " " + text;
+  }
 
 
 }]);
