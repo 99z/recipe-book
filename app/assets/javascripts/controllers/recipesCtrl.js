@@ -1,4 +1,4 @@
-recipeBook.controller('recipesCtrl', ['$scope', '$state', '$window', 'Restangular', 'Auth', 'recipe', function($scope, $state, $window, Restangular,  Auth, recipe){
+recipeBook.controller('recipesCtrl', ['$scope', '$state', '$window', 'Restangular', 'Auth', 'recipe', 'ModalService', function($scope, $state, $window, Restangular,  Auth, recipe, ModalService){
 
   $scope.recipe = recipe;
   $scope.scraperActive = false;
@@ -64,7 +64,23 @@ recipeBook.controller('recipesCtrl', ['$scope', '$state', '$window', 'Restangula
       var text = "note"
     };
     return count + " " + text;
-  }
+  };
+
+
+  $scope.openModal = function(notable) {
+    ModalService.showModal({
+      templateUrl: "templates/recipes/notesModal.html",
+      controller: "NotesModalController",
+      inputs: {
+        notable: notable
+      }
+    }).then(function(modal) {
+      modal.element.modal();
+      modal.close.then(function(result) {
+        //console.log(result);
+      });
+    });
+  };
 
 
 }]);

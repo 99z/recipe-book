@@ -78,10 +78,10 @@
             {{ instruction.body }}
           </span>
 
-          <a href ng-if='instruction.notes.length > 0'>
+          <a href ng-if='instruction.notes.length > 0' ng-click='openModal(instruction)'>
             {{ noteCount(instruction) }}
           </a>
-          <a href ng-if='instruction.notes.length == 0'>
+          <a href ng-if='instruction.notes.length == 0' ng-click='openModal(instruction)'>
             + add a note
           </a>
         </p>
@@ -97,10 +97,10 @@
           <tr ng-repeat='ingredient in recipe.ingredients'>
             <td editable-textarea='ingredient.name' e-rows="2" onaftersave='updateRecipe()'>{{ ingredient.name }}</td>
             <td>
-              <a href ng-if='ingredient.notes.length > 0' title='{{ noteCount(ingredient) }}'>
+              <a href ng-if='ingredient.notes.length > 0' ng-click='openModal(ingredient)' title='{{ noteCount(ingredient) }}'>
                 <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
               </a>
-              <a href ng-if='ingredient.notes.length == 0' title='add a note'>
+              <a href ng-if='ingredient.notes.length == 0' ng-click='openModal(ingredient)' title='add a note'>
                 <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
               </a>
             </td>
