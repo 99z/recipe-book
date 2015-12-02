@@ -71,13 +71,33 @@
 
       <div class='col-sm-8'>
         <h4>Directions</h4>
-        <p ng-repeat='instruction in recipe.instructions' editable-textarea='instruction.body' e-rows="4" e-cols="90" onaftersave='updateRecipe()'>{{ instruction.body }}</p>
+        <p ng-repeat='instruction in recipe.instructions' editable-textarea='instruction.body' e-rows="4" e-cols="90" onaftersave='updateRecipe()'>
+          {{ instruction.body }}
+          <a href ng-if='instruction.notes.length > 0'>
+            {{instruction.notes.length}}
+            <ng-pluralize count="instruction.notes.length"
+                when="{'1': 'note',
+                       'other': 'notes'}">
+            </ng-pluralize
+          </a>
+          <a href ng-if='instruction.notes.length == 0'>
+            + add a note
+          </a>
+        </p>
       </div>
 
       <div class='col-sm-4'>
         <h4>Ingredients</h4>
         <ul>
-          <li ng-repeat='ingredient in recipe.ingredients' editable-textarea='ingredient.name' e-rows="1" e-cols="30" onaftersave='updateRecipe()'>{{ ingredient.name }}</li>
+          <li ng-repeat='ingredient in recipe.ingredients' editable-textarea='ingredient.name' e-rows="1" e-cols="30" onaftersave='updateRecipe()'>
+            {{ ingredient.name }}
+            <a href ng-if='ingredient.notes.length > 0'>
+              <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+            </a>
+            <a href ng-if='ingredient.notes.length == 0'>
+              <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+            </a>
+          </li>
         </ul>
       </div>
 

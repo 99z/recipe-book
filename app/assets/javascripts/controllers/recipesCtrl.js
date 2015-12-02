@@ -1,6 +1,7 @@
 recipeBook.controller('recipesCtrl', ['$scope', '$state', '$window', 'Restangular', 'Auth', 'recipe', function($scope, $state, $window, Restangular,  Auth, recipe){
 
   $scope.recipe = recipe;
+  console.log($scope.recipe);
   $scope.scraperActive = false;
 
   Auth.currentUser().then( function(user) {
