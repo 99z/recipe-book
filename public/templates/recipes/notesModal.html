@@ -1,0 +1,38 @@
+<div class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+
+        <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+        <p class="modal-title">
+          {{ notable.body }}
+        </p>
+
+      </div>
+
+
+      <div class="modal-body">
+
+        <div class="modal-body-section">
+          <h4>Notes</h4>
+
+          <p ng-repeat='note in notable.notes' ng-if='owner'>
+            <span editable-textarea='note.body' e-rows="2" onaftersave='updateNote(note)'>{{note.body}}</span> on {{note.updated_at | date:'short'}}
+            <a href ng-click='deleteNote(note, $index)'>delete</a>
+          </p>
+
+          <p ng-repeat='note in notable.notes' ng-if='owner == false'>
+            <span>{{note.body}}</span> on {{note.updated_at | date:'short'}}
+          </p>
+
+          <a href ng-if='owner' ng-click='addNote()'>+ add a note</a>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+</div>

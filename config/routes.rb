@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       resources :users, only: [:index, :destroy, :show, :create, :update]
       resources :recipes, only: [:create, :show, :index, :update, :destroy]
       resources :profiles
+      resources :notes, only: [:create, :update, :destroy]
     end
   end
 end

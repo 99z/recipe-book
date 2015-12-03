@@ -36,7 +36,13 @@ class RecipesController < ApplicationController
 
     if @recipe
       respond_to do |format|
-        format.json { render json: @recipe.to_json(:include => [:instructions, :ingredients]), status: 200 }
+        format.json {
+          render json: @recipe.to_json(:include => [
+            {:instructions => {:include => :notes}},
+            {:ingredients => {:include => :notes}}
+          ]),
+          status: 200
+        }
         format.pdf { render pdf: "recipe", layout: "pdf.html.erb", encoding: 'utf8' }
       end
 
