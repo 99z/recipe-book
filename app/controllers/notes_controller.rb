@@ -34,6 +34,21 @@ class NotesController < ApplicationController
   end
 
 
+  def destroy
+    @note = Note.find(params[:id])
+
+    if @note.destroy
+      respond_to do |format|
+        format.json { render :nothing => :true, :status => 204 }
+      end
+    else
+      respond_to do |format|
+        format.json { render :nothing => :true, :status => 422 }
+      end
+    end
+  end
+
+
   private
 
     def note_params

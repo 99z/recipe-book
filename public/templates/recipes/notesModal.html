@@ -17,19 +17,15 @@
 
         <div class="modal-body-section">
           <h4>Notes</h4>
-          <p ng-repeat='note in notable.notes' editable-textarea='note.body' e-rows="2" onaftersave='updateNote(note)'>
-            {{note.body}} <span>on {{note.updated_at | date:'short'}}</span>
-            <a href ng-click='deleteNote(note)'>delete</a>
+          <p ng-repeat='note in notable.notes'>
+            <span editable-textarea='note.body' e-rows="2" onaftersave='updateNote(note)'>{{note.body}}</span> on {{note.updated_at | date:'short'}}
+            <a href ng-click='deleteNote(note, $index)'>delete</a>
           </p>
           <a href ng-click='addNote()'>+ add a note</a>
         </div>
 
       </div>
 
-
- <!-- <div class="modal-footer">
-        <button type="button" ng-click="close('Completed')" class="btn btn-primary" data-dismiss="modal">Mark Completed</button>
-      </div> -->
 
     </div>
   </div>

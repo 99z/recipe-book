@@ -12,9 +12,13 @@ recipeBook.controller('NotesModalController',
     };
 
 
-    $scope.deleteNote = function(note) {
-
+    $scope.deleteNote = function(note, index) {
+      Restangular.one('notes',note.id).remove()
+        .then( function() {
+          $scope.notable.notes.splice(index, 1);
+        });
     };
+
 
     $scope.addNote = function() {
       Restangular.all('notes').post({notable: notable, notable_type: notable_type})
