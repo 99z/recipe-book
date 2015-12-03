@@ -1,8 +1,9 @@
 recipeBook.controller('NotesModalController',
-  ['$scope', '$window', 'notable', 'notable_type', 'close', 'Restangular',
-  function($scope, $window, notable, notable_type, close, Restangular) {
+  ['$scope', '$window', 'notable', 'notable_type', 'owner', 'close', 'Restangular',
+  function($scope, $window, notable, notable_type, owner, close, Restangular) {
 
     $scope.notable = notable;
+    $scope.owner = owner;
 
     $scope.updateNote = function(note){
       Restangular.one('notes', note.id).patch(note)

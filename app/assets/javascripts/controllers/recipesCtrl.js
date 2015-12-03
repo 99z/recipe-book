@@ -75,7 +75,8 @@ recipeBook.controller('recipesCtrl', ['$scope', '$state', '$window', 'Restangula
       controller: "NotesModalController",
       inputs: {
         notable: notable,
-        notable_type: type
+        notable_type: type,
+        owner: $scope.owner
       }
     }).then(function(modal) {
       modal.element.modal();

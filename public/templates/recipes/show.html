@@ -4,7 +4,7 @@
 
     <div class='row control-buttons'>
 
-      <div class='col-xs-6 pull-left' ng-hide='scraperActive'>
+      <div class='col-xs-6 pull-left' ng-hide='scraperActive || owner == false'>
         <button class='btn btn-primary' ng-click="toggleScraper()">
           Import URL
         </button>
@@ -140,14 +140,31 @@
 
       <div class='col-sm-8'>
         <h4>Directions</h4>
-        <p ng-repeat='instruction in recipe.instructions'>{{ instruction.body }}</p>
+        <p ng-repeat='instruction in recipe.instructions'>
+          <span>
+            {{ instruction.body }}
+          </span>
+
+          <a href ng-if='instruction.notes.length > 0' ng-click="openModal(instruction, 'Instruction')">
+            {{ noteCount(instruction) }}
+          </a>
+        </p>
       </div>
 
       <div class='col-sm-4'>
         <h4>Ingredients</h4>
-        <ul>
-          <li ng-repeat='ingredient in recipe.ingredients'>{{ ingredient.body }}</li>
-        </ul>
+
+        <table class='table table-condensed'>
+          <tr ng-repeat='ingredient in recipe.ingredients'>
+            <td>{{ ingredient.body }}</td>
+            <td>
+              <a href ng-if='ingredient.notes.length > 0' ng-click="openModal(ingredient, 'Ingredient')" title='{{ noteCount(ingredient) }}'>
+                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+              </a>
+            </td>
+          </tr>
+        </table>
+
       </div>
 
     </div>
