@@ -69,12 +69,13 @@ recipeBook.controller('recipesCtrl', ['$scope', '$state', '$window', 'Restangula
 
 
 
-  $scope.openModal = function(notable) {
+  $scope.openModal = function(notable, type) {
     ModalService.showModal({
       templateUrl: "templates/recipes/notesModal.html",
       controller: "NotesModalController",
       inputs: {
-        notable: notable
+        notable: notable,
+        notable_type: type
       }
     }).then(function(modal) {
       modal.element.modal();

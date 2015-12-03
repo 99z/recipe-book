@@ -1,6 +1,6 @@
 recipeBook.controller('NotesModalController',
-  ['$scope', '$window', 'notable', 'close', 'Restangular',
-  function($scope, $window, notable, close, Restangular) {
+  ['$scope', '$window', 'notable', 'notable_type', 'close', 'Restangular',
+  function($scope, $window, notable, notable_type, close, Restangular) {
 
     $scope.notable = notable;
 
@@ -8,6 +8,18 @@ recipeBook.controller('NotesModalController',
       Restangular.one('notes', note.id).patch(note)
         .then(function(response) {
           note.updated_at = response.updated_at;
+        });
+    };
+
+
+    $scope.deleteNote = function(note) {
+
+    };
+
+    $scope.addNote = function() {
+      Restangular.all('notes').post({notable: notable, notable_type: notable_type})
+        .then(function(response) {
+          $scope.notable.notes.push(response);
         });
     };
 

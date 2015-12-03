@@ -19,9 +19,9 @@
           <h4>Notes</h4>
           <p ng-repeat='note in notable.notes' editable-textarea='note.body' e-rows="2" onaftersave='updateNote(note)'>
             {{note.body}} <span>on {{note.updated_at | date:'short'}}</span>
-            <a href>delete</a>
+            <a href ng-click='deleteNote(note)'>delete</a>
           </p>
-          <a href>+ add a note</a>
+          <a href ng-click='addNote()'>+ add a note</a>
         </div>
 
       </div>
