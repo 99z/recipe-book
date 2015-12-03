@@ -6,10 +6,9 @@
 
         <button type="button" class="close" ng-click="close('Cancel')" data-dismiss="modal" aria-hidden="true">&times;</button>
 
-        <h3 class="modal-title">
-          <!-- <div click-to-edit="card.title" id='card.id' model="cards" attribute="title"></div> -->
-          Modal works!
-        </h3>
+        <p class="modal-title">
+          {{ notable.body }}
+        </p>
 
       </div>
 
@@ -17,20 +16,20 @@
       <div class="modal-body">
 
         <div class="modal-body-section">
-          <p>
-            {{ testVal }}
-            <!-- <div click-to-edit="card.description" id='card.id' model="cards" attribute="description"></div> -->
+          <h4>Notes</h4>
+          <p ng-repeat='note in notable.notes' editable-textarea='note.body' e-rows="2" onaftersave='updateNote(note)'>
+            {{note.body}} <span>on {{note.updated_at | date:'short'}}</span>
+            <a href>delete</a>
           </p>
+          <a href>+ add a note</a>
         </div>
 
-
-
       </div>
 
 
-      <div class="modal-footer">
-        <!-- <button type="button" ng-click="close('Completed')" class="btn btn-primary" data-dismiss="modal">Mark Completed</button> -->
-      </div>
+ <!-- <div class="modal-footer">
+        <button type="button" ng-click="close('Completed')" class="btn btn-primary" data-dismiss="modal">Mark Completed</button>
+      </div> -->
 
     </div>
   </div>

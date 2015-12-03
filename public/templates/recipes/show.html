@@ -95,7 +95,7 @@
 
         <table class='table table-condensed'>
           <tr ng-repeat='ingredient in recipe.ingredients'>
-            <td editable-textarea='ingredient.name' e-rows="2" onaftersave='updateRecipe()'>{{ ingredient.name }}</td>
+            <td editable-textarea='ingredient.body' e-rows="2" onaftersave='updateRecipe()'>{{ ingredient.body }}</td>
             <td>
               <a href ng-if='ingredient.notes.length > 0' ng-click='openModal(ingredient)' title='{{ noteCount(ingredient) }}'>
                 <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
@@ -146,7 +146,7 @@
       <div class='col-sm-4'>
         <h4>Ingredients</h4>
         <ul>
-          <li ng-repeat='ingredient in recipe.ingredients'>{{ ingredient.name }}</li>
+          <li ng-repeat='ingredient in recipe.ingredients'>{{ ingredient.body }}</li>
         </ul>
       </div>
 

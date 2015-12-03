@@ -67,6 +67,8 @@ recipeBook.controller('recipesCtrl', ['$scope', '$state', '$window', 'Restangula
   };
 
 
+
+
   $scope.openModal = function(notable) {
     ModalService.showModal({
       templateUrl: "templates/recipes/notesModal.html",
