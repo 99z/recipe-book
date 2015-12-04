@@ -29,7 +29,7 @@ namespace :recipes do
       # ingredients
       recipe.ingredients.delete_all
       page.search('.recipe-ingredients')[0].children.each_with_index do |step, index|
-        recipe.ingredients.build(name: step.text.strip.gsub(/\s+/, " ")) unless step.text.strip.to_s.empty?
+        recipe.ingredients.build(body: step.text.strip.gsub(/\s+/, " ")) unless step.text.strip.to_s.empty?
       end
 
       recipe.photo_url = nil

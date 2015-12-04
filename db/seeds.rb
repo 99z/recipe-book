@@ -43,7 +43,8 @@ foobar = User.create( :email => 'foobar@foo.com',
                       :password => 'password')
 foobar.create_profile(:first_name => "Foo",
                       :last_name => "Bar",
-                      :location => "Footown, OH")
+                      :location => "Footown, OH",
+                      :avatar => open(Faker::Avatar.image.gsub(':', 's:')))
 
 
 # Build other users
@@ -57,7 +58,8 @@ foobar.create_profile(:first_name => "Foo",
                   :password => 'password')
   u.create_profile( :first_name => first_name,
                     :last_name => last_name,
-                    :location => Faker::Address.city + ", " + Faker::Address.state)
+                    :location => Faker::Address.city + ", " + Faker::Address.state,
+                    :avatar => open(Faker::Avatar.image.gsub(':', 's:')))
 end
 
 
