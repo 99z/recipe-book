@@ -1,8 +1,8 @@
 class CreateFollowerships < ActiveRecord::Migration
   def change
     create_table :followerships do |t|
-      t.integer :followed_id, null: false
-      t.integer :follower_id, null: false
+      t.integer :followed_id
+      t.integer :follower_id
 
       t.timestamps null: false
     end

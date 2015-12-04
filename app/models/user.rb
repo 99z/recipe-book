@@ -13,10 +13,10 @@ class User < ActiveRecord::Base
                                    foreign_key: "followed_id",
                                    dependent: :destroy
   has_many :following, through: :active_followerships, source: :followed
-  has_many :followers, through: :active_followerships, source: :follower
+  has_many :followers, through: :passive_followerships, source: :follower
 
   def follow(other_user)
-    active_followerships.created(followed_id: other_user.id)
+    active_followerships.create(followed_id: other_user.id)
   end
 
   def unfollow(other_user)
