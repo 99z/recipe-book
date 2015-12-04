@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151119022106) do
+ActiveRecord::Schema.define(version: 20151204040741) do
+
+  create_table "followerships", force: :cascade do |t|
+    t.integer  "followed_id", null: false
+    t.integer  "follower_id", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "followerships", ["followed_id", "follower_id"], name: "index_followerships_on_followed_id_and_follower_id", unique: true
 
   create_table "ingredients", force: :cascade do |t|
     t.string   "name",       default: "Add an ingredient...", null: false
