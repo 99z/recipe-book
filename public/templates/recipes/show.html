@@ -1,5 +1,3 @@
-<!-- SHOW/HIDE note buttons on Mouseover -->
-
 <main id='recipe'>
 
   <div class='recipe-controls'>
@@ -75,7 +73,7 @@
 
         <h4>Directions</h4>
 
-        <p ng-repeat='instruction in recipe.instructions'>
+        <p ng-repeat='instruction in recipe.instructions' ng-mouseenter='showAddNote(instruction)' ng-mouseleave='hideAddNotes()'>
           <span editable-textarea='instruction.body' e-rows="4" onaftersave='updateRecipe()'>
             {{ instruction.body }}
           </span>
@@ -83,7 +81,7 @@
           <a href ng-if='instruction.notes.length > 0' ng-click="openModal(instruction, 'Instruction')">
             {{ noteCount(instruction) }}
           </a>
-          <a href ng-if='instruction.notes.length == 0' ng-click="openModal(instruction, 'Instruction')">
+          <a href ng-if='instruction.notes.length == 0 && isHovered(instruction)' ng-click="openModal(instruction, 'Instruction')">
             + add a note
           </a>
         </p>
@@ -96,13 +94,13 @@
         <h4>Ingredients</h4>
 
         <table class='table table-condensed'>
-          <tr ng-repeat='ingredient in recipe.ingredients'>
+          <tr ng-repeat='ingredient in recipe.ingredients' ng-mouseenter='showAddNote(ingredient)' ng-mouseleave='hideAddNotes()'>
             <td editable-textarea='ingredient.body' e-rows="2" onaftersave='updateRecipe()'>{{ ingredient.body }}</td>
             <td>
               <a href ng-if='ingredient.notes.length > 0' ng-click="openModal(ingredient, 'Ingredient')" title='{{ noteCount(ingredient) }}'>
                 <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
               </a>
-              <a href ng-if='ingredient.notes.length == 0' ng-click="openModal(ingredient, 'Ingredient')" title='add a note'>
+              <a href data-add-note='ingredient.id' ng-if='ingredient.notes.length == 0 && isHovered(ingredient)' ng-click="openModal(ingredient, 'Ingredient')" title='add a note'>
                 <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
               </a>
             </td>

@@ -57,6 +57,21 @@ recipeBook.controller('recipesCtrl', ['$scope', '$state', '$window', 'Restangula
   };
 
 
+  $scope.showAddNote = function(notable) {
+    $scope.hovered = notable;
+  };
+
+
+  $scope.isHovered = function(notable) {
+    return (notable == $scope.hovered)
+  }
+
+
+  $scope.hideAddNotes = function() {
+    $scope.hovered = {};
+  }
+
+
   $scope.noteCount = function(notable) {
     var count = notable.notes.length;
     var text = "notes"
