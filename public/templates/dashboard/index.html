@@ -1,5 +1,13 @@
-<h1> this works!</h1>
+<h1>Following:</h1>
 
-<h2>{{ test }}</h2>
+<ul ng-repeat="follow in following">
+  <li>{{ follow.email }}</li>
+</ul>
+
+<h1>Followers:</h1>
+
+<ul ng-repeat="follower in followers">
+  <li>{{ follower.email }}</li>
+</ul>
 
 <p> Current user: {{ currentUser }}</p>
