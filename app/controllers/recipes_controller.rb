@@ -33,6 +33,8 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.where(:id => params[:id])[0]
+    @notes_ingredients = @recipe.ingredients.collect(&:notes).flatten
+    @notes_instructions = @recipe.instructions.collect(&:notes).flatten
 
     if @recipe
       respond_to do |format|
