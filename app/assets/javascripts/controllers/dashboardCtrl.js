@@ -10,21 +10,30 @@ recipeBook.controller('dashboardCtrl', ['$scope', 'Restangular', 'Auth', functio
 
     Restangular.all('followerships').getList().then(function(followerships) {
 
-      followers = followerships.filter(function(f) {
-        return f.followed_id == $scope.currentUser.id;
-      });
-
       following = followerships.filter(function(f) {
         return f.follower_id == $scope.currentUser.id;
       });
 
-      console.log($scope.following);
+      followers = followerships.filter(function(f) {
+        return f.followed_id == $scope.currentUser.id;
+      });
 
       following.forEach(function(following) {
-        $scope.following.push(Restangular
-                          .one('users', following.followed_id)
-                          .get()
-                          .$object);
+
+        user = Restangular
+                .one('users', following.followed_id)
+                .get()
+                .$object;
+
+        user.profile = Restangular
+                       .one('profiles', following.followed_id)
+                       .get()
+                       .$object;
+
+        $scope.following.push(user);
+
+        console.log(user.profile);
+
       });
 
       followers.forEach(function(follower) {

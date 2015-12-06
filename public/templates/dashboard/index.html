@@ -10,4 +10,23 @@
   <li>{{ follower.email }}</li>
 </ul>
 
-<p> Current user: {{ currentUser }}</p>
+<h1>Followed Users</h1>
+
+<div class="row following">
+
+  <div ng-repeat="follow in following | filter:filterText" class="item">
+
+    <div class="well">
+      <div class="follow-img">
+        <img class="img-responsive" ng-src="{{ follow.profile.avatar }}">
+        <a href class="btn btn-primary view">unfollow</a>
+        <a href="/#/users/{{ follow.id }}" class="btn btn-primary add">view profile</a>
+      </div>
+
+      <p><strong>{{ follow.email }}</strong></p>
+      <p><strong>From: </strong>{{ follow.profile.location }}</p>
+      <p><strong>Recipes: </strong>{{ follow.recipes.length }}</p>
+    </div>
+  </div>
+
+</div>
