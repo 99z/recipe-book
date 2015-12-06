@@ -35,6 +35,7 @@
       <p class="location"><strong>From: </strong>{{ profile.location }}</p>
       <br />
       <p class="recipe-count"><strong>Number of recipes: </strong> {{ recipes.length }}</p>
+      <button type="button" class="btn btn-primary pull-right" ng-click="follow(profile.user_id)">Follow</button>
     </div>
 
   </div>

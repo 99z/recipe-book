@@ -10,18 +10,18 @@ recipeBook.controller('dashboardCtrl', ['$scope', '$location', 'Restangular', 'A
 
     Restangular.all('followerships').getList().then(function(followerships) {
 
-      following = followerships.filter(function(f) {
+      var following = followerships.filter(function(f) {
         return f.follower_id == $scope.currentUser.id;
       });
 
-      followers = followerships.filter(function(f) {
+      var followers = followerships.filter(function(f) {
         return f.followed_id == $scope.currentUser.id;
       });
 
       // TODO: refactor into a service
       following.forEach(function(following) {
 
-        user = Restangular
+        var user = Restangular
                .one('users', following.followed_id)
                .get()
                .$object;
@@ -37,7 +37,7 @@ recipeBook.controller('dashboardCtrl', ['$scope', '$location', 'Restangular', 'A
 
       followers.forEach(function(follower) {
 
-        user = Restangular
+        var user = Restangular
                .one('users', follower.follower_id)
                .get()
                .$object;
@@ -57,7 +57,7 @@ recipeBook.controller('dashboardCtrl', ['$scope', '$location', 'Restangular', 'A
 
         console.log(followerships);
 
-        unfollowedUser = followerships.filter(function(f) {
+        var unfollowedUser = followerships.filter(function(f) {
           return f.followed_id == user.id;
         });
 

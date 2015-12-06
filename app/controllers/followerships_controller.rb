@@ -12,6 +12,18 @@ class FollowershipsController < ApplicationController
     end
   end
 
+  def create
+    @followership = Followership.create(whitelisted_followership_params)
+
+    respond_to do |format|
+      if @followership.save
+        format.json { render json: @followership }
+      else
+        format.json { render nothing: true, status: 404 }
+      end
+    end
+  end
+
   def destroy
     @followership = Followership.find(params[:id])
 
@@ -26,4 +38,9 @@ class FollowershipsController < ApplicationController
     end
   end
 
+  private
+
+  def whitelisted_followership_params
+    params.require(:followership).permit(:follower_id, :followed_id)
+  end
 end

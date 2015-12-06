@@ -61,6 +61,13 @@ recipeBook.controller('userShowCtrl', ['$scope', '$location', '$stateParams', 'R
     });
   };
 
+  $scope.follow = function(userID) {
+    var newFollow = { followed_id: userID,
+                      follower_id: $scope.currentUser.id };
 
+    var baseFollowerships = Restangular.all('followerships');
+
+    baseFollowerships.post(newFollow);
+  };
 
 }]);
