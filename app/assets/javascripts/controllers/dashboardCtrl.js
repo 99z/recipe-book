@@ -1,4 +1,4 @@
-recipeBook.controller('dashboardCtrl', ['$scope', 'Restangular', 'Auth', function($scope, Restangular,  Auth){
+recipeBook.controller('dashboardCtrl', ['$scope', '$location', 'Restangular', 'Auth', function($scope, $location, Restangular,  Auth){
 
   $scope.test = "angular works";
   Auth.currentUser().then( function(user) {
@@ -18,12 +18,13 @@ recipeBook.controller('dashboardCtrl', ['$scope', 'Restangular', 'Auth', functio
         return f.followed_id == $scope.currentUser.id;
       });
 
+      // TODO: refactor into a service
       following.forEach(function(following) {
 
         user = Restangular
-                .one('users', following.followed_id)
-                .get()
-                .$object;
+               .one('users', following.followed_id)
+               .get()
+               .$object;
 
         user.profile = Restangular
                        .one('profiles', following.followed_id)
@@ -32,16 +33,40 @@ recipeBook.controller('dashboardCtrl', ['$scope', 'Restangular', 'Auth', functio
 
         $scope.following.push(user);
 
-        console.log(user.profile);
-
       });
 
       followers.forEach(function(follower) {
-        $scope.followers.push(Restangular
-                          .one('users', follower.follower_id)
-                          .get()
-                          .$object);
+
+        user = Restangular
+               .one('users', follower.follower_id)
+               .get()
+               .$object;
+
+        user.profile = Restangular
+                       .one('profiles', follower.follower_id)
+                       .get()
+                       .$object;
+
+        $scope.followers.push(user);
+
       });
     });
+
+    $scope.unfollow = function(user) {
+      Restangular.all('followerships').getList().then(function(followerships) {
+
+        console.log(followerships);
+
+        unfollowedUser = followerships.filter(function(f) {
+          return f.followed_id == user.id;
+        });
+
+        console.log(unfollowedUser[0].id);
+
+        Restangular.one('followerships', unfollowedUser[0].id).remove().then(function(followership) {
+          $scope.following.splice($scope.following.indexOf(followership), 1);
+        });
+      });
+    };
 
 }]);

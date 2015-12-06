@@ -20,7 +20,7 @@ class RecipesController < ApplicationController
 
   def index
     @recipes = Recipe.where("user_id = ?", current_user.id)
-
+    
     respond_to do |format|
       if @recipes
         format.json { render json: @recipes }

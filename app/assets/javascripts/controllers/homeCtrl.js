@@ -1,4 +1,4 @@
-recipeBook.controller('homeCtrl', ['$scope', '$route', 'Restangular', 'Auth', '$location', function($scope, $route, Restangular, Auth, $location){
+recipeBook.controller('homeCtrl', ['$scope', 'Restangular', 'Auth', '$location', function($scope, Restangular, Auth, $location){
 
   $scope.credentials = {};
 

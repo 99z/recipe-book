@@ -12,4 +12,18 @@ class FollowershipsController < ApplicationController
     end
   end
 
+  def destroy
+    @followership = Followership.find(params[:id])
+
+    if @followership.destroy
+      respond_to do |format|
+        format.json { render :nothing => :true, :status => 204 }
+      end
+    else
+      respond_to do |format|
+        format.json { render :nothing => :true, :status => 422 }
+      end
+    end
+  end
+
 end
