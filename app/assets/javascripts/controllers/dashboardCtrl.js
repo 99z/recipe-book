@@ -52,21 +52,24 @@ recipeBook.controller('dashboardCtrl', ['$scope', '$location', 'Restangular', 'A
       });
     });
 
-    $scope.unfollow = function(user) {
+    $scope.unfollow = function(user, index) {
       Restangular.all('followerships').getList().then(function(followerships) {
-
-        console.log(followerships);
 
         var unfollowedUser = followerships.filter(function(f) {
           return f.followed_id == user.id;
         });
 
-        console.log(unfollowedUser[0].id);
+        console.log(unfollowedUser);
 
         Restangular.one('followerships', unfollowedUser[0].id).remove().then(function(followership) {
-          $scope.following.splice($scope.following.indexOf(followership), 1);
+          $scope.following.splice(index, 1);
         });
       });
     };
+
+    Restangular.all('newsfeeds').getList().then(function(newsfeed) {
+      console.log(newsfeed);
+      $scope.newsfeed = newsfeed;
+    });
 
 }]);

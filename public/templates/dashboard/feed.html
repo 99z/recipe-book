@@ -1,0 +1,26 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-xs-12">
+      <h1 class="text-center">Activity Feed</h1>
+    </div>
+  </div>
+
+  <div ng-repeat="item in newsfeed">
+
+    <div class="row">
+      <div class="col-xs-12">
+        {{ item.author.first_name }} {{ item.author.last_name}} {{ item.activity }} on {{ item.date | date }}:
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-3">
+        <img ng-src="{{ item.author.avatar }}" class="img-responsive">
+      </div>
+    </div>
+
+
+  </div>
+
+</div>

@@ -13,13 +13,13 @@
 
       <p><strong>{{ follow.profile.first_name }} {{ follow.profile.last_name }}</strong></p>
       <p><strong>From: </strong>{{ follow.profile.location }}</p>
-      <a href ng-click="unfollow(follow)">unfollow</a>
+      <a href ng-click="unfollow(follow, $index)">unfollow</a>
     </div>
   </div>
 
 </div>
 
-<h1>Followers:</h1>
+<h1>My Followers</h1>
 
 <div class="row following">
 

@@ -26,4 +26,29 @@ class User < ActiveRecord::Base
   def following?(other_user)
     following.include?(other_user)
   end
+
+  def following_activity_recent
+    activity = []
+    self.following.each do |user|
+      user.recipes.each do |recipe|
+        recipe_activity = Hash["author" => user.profile,
+                               "activity" => "added a recipe for " + recipe.title,
+                               "date" => recipe.created_at,
+                               "type" => "recipe",
+                               "target" => recipe]
+        activity << recipe_activity
+      end
+
+      user.active_followerships.each do |follow|
+        follow_activity = Hash["author" => user.profile,
+                               "activity" => "started following " + User.find(follow.followed_id).profile.full_name,
+                               "date" => follow.created_at,
+                               "type" => "follow",
+                               "target" => User.find(follow.followed_id).profile]
+        activity << follow_activity
+      end
+    end
+
+    activity.last(20).reverse
+  end
 end
