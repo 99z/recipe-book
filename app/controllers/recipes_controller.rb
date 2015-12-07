@@ -33,10 +33,18 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.where(:id => params[:id])[0]
+    @notes_ingredients = @recipe.ingredients.collect(&:notes).flatten
+    @notes_instructions = @recipe.instructions.collect(&:notes).flatten
 
     if @recipe
       respond_to do |format|
-        format.json { render json: @recipe.to_json(:include => [:instructions, :ingredients]), status: 200 }
+        format.json {
+          render json: @recipe.to_json(:include => [
+            {:instructions => {:include => :notes}},
+            {:ingredients => {:include => :notes}}
+          ]),
+          status: 200
+        }
         format.pdf { render pdf: "recipe", layout: "pdf.html.erb", encoding: 'utf8' }
       end
 
@@ -55,8 +63,15 @@ class RecipesController < ApplicationController
 
     if @recipe.update(recipe_params)
       if params['$name'] === 'scraper'
-        Rake::Task['recipes:scrape_nyt'].invoke(@recipe)
-        Rake::Task['recipes:scrape_nyt'].reenable
+        site = URI.parse(params[:url]).host
+
+        if site == "cooking.nytimes.com"
+          Rake::Task['recipes:scrape_nyt'].invoke(@recipe)
+          Rake::Task['recipes:scrape_nyt'].reenable
+        elsif site == "www.epicurious.com"
+          Rake::Task['recipes:scrape_epicurious'].invoke(@recipe)
+          Rake::Task['recipes:scrape_epicurious'].reenable
+        end
         @recipe = Recipe.where(:id => params[:id])[0]
       end
 

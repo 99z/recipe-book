@@ -2,8 +2,8 @@ require 'mechanize'
 
 
 namespace :recipes do
-  desc 'Scrapes recipe from NYT'
-  task :scrape_nyt, [:recipe] => :environment do |t, args|
+  desc 'Scrapes recipe from Epicurious'
+  task :scrape_epicurious, [:recipe] => :environment do |t, args|
 
     scraper = Mechanize.new do |agent|
       agent.user_agent_alias = 'Mac Safari'
@@ -14,29 +14,28 @@ namespace :recipes do
 
     scraper.get(recipe.url) do |page|
 
-      recipe.title = page.search('.recipe-title').text.strip
-      recipe.description = page.search('.topnote > p:not(.related-article)').text.strip
+      recipe.title = page.search('.title-source h1').text.strip
+      recipe.description = page.search('.dek p').text.strip
       recipe.url = page.uri.to_s
 
       # instructions
       recipe.instructions.delete_all
-      page.search('.recipe-steps').children.each_with_index do |step, index|
+      page.search('.preparation-steps').children.each_with_index do |step, index|
         recipe.instructions.build(body: step.text.strip) unless step.text.strip.to_s.empty?
       end
 
-      recipe.author = page.search('.byline-name').text.strip
+      recipe.author = page.search('.byline.author').text.strip
 
       # ingredients
       recipe.ingredients.delete_all
-      page.search('.recipe-ingredients')[0].children.each_with_index do |step, index|
+      page.search('li.ingredient').each_with_index do |step, index|
         recipe.ingredients.build(body: step.text.strip.gsub(/\s+/, " ")) unless step.text.strip.to_s.empty?
       end
 
       recipe.photo_url = nil
-      media_container = page.search('.media-container')
-      recipe.photo_url = media_container.children[1]['src'] unless media_container.empty?
+      meta_property = page.at('meta[property="og:image"]')[:content]
+      recipe.photo_url = meta_property unless meta_property.empty?
     end
-
 
     recipe.save!
 

@@ -14,8 +14,8 @@
 ActiveRecord::Schema.define(version: 20151204040741) do
 
   create_table "followerships", force: :cascade do |t|
-    t.integer  "followed_id", null: false
-    t.integer  "follower_id", null: false
+    t.integer  "followed_id"
+    t.integer  "follower_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20151204040741) do
   add_index "followerships", ["followed_id", "follower_id"], name: "index_followerships_on_followed_id_and_follower_id", unique: true
 
   create_table "ingredients", force: :cascade do |t|
-    t.string   "name",       default: "Add an ingredient...", null: false
+    t.string   "body",       default: "Add an ingredient...", null: false
     t.integer  "recipe_id",                                   null: false
     t.datetime "created_at",                                  null: false
     t.datetime "updated_at",                                  null: false
@@ -34,6 +34,14 @@ ActiveRecord::Schema.define(version: 20151204040741) do
     t.integer  "recipe_id",                                          null: false
     t.datetime "created_at",                                         null: false
     t.datetime "updated_at",                                         null: false
+  end
+
+  create_table "notes", force: :cascade do |t|
+    t.text     "body",         default: "Add a note...", null: false
+    t.string   "notable_type",                           null: false
+    t.integer  "notable_id",                             null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
   end
 
   create_table "profiles", force: :cascade do |t|

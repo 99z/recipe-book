@@ -14,19 +14,47 @@
   <div class='row'>
 
     <div class='col-xs-12'>
-      <h4>Ingredients</h4>
+      <h3>Ingredients</h3>
       <ul>
         <% @recipe.ingredients.each do |ingredient| %>
-          <li><%= ingredient.name %></li>
+          <li>
+            <%= ingredient.body %>
+            <% ingredient.notes.each do |note| %>
+              <sup><%= @notes_ingredients.find_index(note) + 1 %></sup>
+            <% end %>
+          </li>
         <% end %>
       </ul>
+
+      <% if !@notes_ingredients.empty? %>
+        <h4>Notes on Ingredients:</h4>
+        <ol>
+          <% @notes_ingredients.each do |ingredient_note| %>
+            <li><%= ingredient_note.body %><i><%= " on #{ingredient_note.updated_at.strftime('%m/%d/%Y %I:%M%p')}" %></i></li>
+          <% end %>
+        </ol>
+      <% end %>
     </div>
 
 
     <div class='col-xs-12'>
-      <h4>Directions</h4>
+      <h3>Directions</h3>
       <% @recipe.instructions.each do |instruction| %>
-        <p><%= instruction.body %></p>
+        <p>
+          <%= instruction.body %>
+          <% instruction.notes.each do |note| %>
+            <sup><%= @notes_instructions.find_index(note) + 1 %></sup>
+          <% end %>
+        </p>
+      <% end %>
+
+      <% if !@notes_instructions.empty? %>
+        <h4>Notes on Directions:</h4>
+        <ol>
+          <% @notes_instructions.each do |instruction_note| %>
+            <li><%= instruction_note.body %><i><%= " on #{instruction_note.updated_at.strftime('%m/%d/%Y %I:%M%p')}" %></i></li>
+          <% end %>
+        </ol>
       <% end %>
     </div>
 

@@ -10,7 +10,7 @@
 
   <%= menu_group :pull => :right do %>
     <%= link_to "#/users/#{current_user.id}" do %>
-      <%= image_tag('https://cldup.com/QiXfZQ31vQ.jpg', class: "img img-thumbnail") %>
+      <%= image_tag current_user.profile.avatar.url, class: "img img-thumbnail" %>
     <% end %>
   <% end %>
 

@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       resources :followerships, only: [:index, :destroy, :create]
       resources :newsfeeds, only: [:index]
       resources :profiles
+      resources :notes, only: [:create, :update, :destroy]
     end
   end
 end

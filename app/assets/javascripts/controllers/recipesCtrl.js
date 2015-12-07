@@ -1,4 +1,4 @@
-recipeBook.controller('recipesCtrl', ['$scope', '$state', '$window', 'Restangular', 'Auth', 'recipe', function($scope, $state, $window, Restangular,  Auth, recipe){
+recipeBook.controller('recipesCtrl', ['$scope', '$state', '$window', 'Restangular', 'Auth', 'recipe', 'ModalService', function($scope, $state, $window, Restangular,  Auth, recipe, ModalService){
 
   $scope.recipe = recipe;
   $scope.scraperActive = false;
@@ -54,6 +54,51 @@ recipeBook.controller('recipesCtrl', ['$scope', '$state', '$window', 'Restangula
   $scope.printRecipe = function() {
     var printWindow = $window.open('/api/v1/recipes/'+$scope.recipe.id+'.pdf');
     printWindow.print();
+  };
+
+
+  $scope.showAddNote = function(notable) {
+    $scope.hovered = notable;
+  };
+
+
+  $scope.isHovered = function(notable) {
+    return (notable == $scope.hovered)
+  }
+
+
+  $scope.hideAddNotes = function() {
+    $scope.hovered = {};
+  }
+
+
+  $scope.noteCount = function(notable) {
+    var count = notable.notes.length;
+    var text = "notes"
+    if (count == 1) {
+      var text = "note"
+    };
+    return count + " " + text;
+  };
+
+
+
+
+  $scope.openModal = function(notable, type) {
+    ModalService.showModal({
+      templateUrl: "templates/recipes/notesModal.html",
+      controller: "NotesModalController",
+      inputs: {
+        notable: notable,
+        notable_type: type,
+        owner: $scope.owner
+      }
+    }).then(function(modal) {
+      modal.element.modal();
+      modal.close.then(function(result) {
+        //console.log(result);
+      });
+    });
   };
 
 
