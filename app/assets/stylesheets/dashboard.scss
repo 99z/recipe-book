@@ -1,3 +1,72 @@
 // Place all the styles related to the dashboard controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+*, *:before, *:after {box-sizing:  border-box !important;}
+
+img.follow-img {
+  width: 100%;
+  height: auto;
+}
+
+.date-taken, .username, .likes, .comments {
+  color: rgb(189, 189, 189);
+}
+
+.row.following {
+ -moz-column-width: 18em;
+ -webkit-column-width: 18em;
+ -moz-column-gap: 1em;
+ -webkit-column-gap:1em;
+}
+
+.item {
+ display: inline-block;
+ padding:  .25rem;
+ width:  100%;
+}
+
+.well {
+ position:relative;
+ display: block;
+}
+
+.tags-list {
+  display: inline;
+}
+
+.tag {
+  border: 1px solid black;
+  text-align: center;
+}
+
+div.follow-img {
+  position: relative;
+  float:left;
+  margin:5px;
+}
+
+div.follow-img:hover img{
+  opacity:0.5;
+}
+
+div.follow-img:hover .btn {
+  display: block;
+}
+
+div.follow-img .btn {
+  position:absolute;
+  display:none;
+}
+
+div.follow-img .btn.view {
+  top: 50%;
+  left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+div.follow-img .btn.add {
+	top: 75%;
+	left: 50%;
+	transform: translate(-50%, -75%);
+}

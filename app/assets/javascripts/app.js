@@ -37,6 +37,12 @@ recipeBook.config(['$stateProvider', '$urlRouterProvider', function($stateProvid
       controller: "dashboardCtrl"
     })
 
+    .state('dashboard.feed', {
+      url: "/feed",
+      templateUrl: "/templates/dashboard/feed.html",
+      controller: "dashboardCtrl"
+    })
+
     .state('recipes', {
       url: "/recipes",
       templateUrl: "/templates/recipes/layout.html"

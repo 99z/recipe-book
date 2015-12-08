@@ -17,6 +17,17 @@ recipeBook.controller('userShowCtrl', ['$scope', '$location', '$stateParams', 'R
     $scope.recipes = recipes;
   });
 
+  Restangular.all('followerships').getList().then(function(followerships) {
+    filter = _.find(followerships, function(f) { return f.followed_id == $stateParams.userId && f.follower_id == $scope.currentUser.id; });
+
+    if (filter) {
+      $scope.alreadyFollowed = false;
+    } else {
+      $scope.alreadyFollowed = true;
+    }
+
+  });
+
   $scope.viewMode = "thumbnail";
   $scope.sortType = "title";
   $scope.sortReverse = "false";
@@ -61,6 +72,13 @@ recipeBook.controller('userShowCtrl', ['$scope', '$location', '$stateParams', 'R
     });
   };
 
+  $scope.follow = function(userID) {
+    var newFollow = { followed_id: userID,
+                      follower_id: $scope.currentUser.id };
 
+    Restangular.all('followerships').post(newFollow);
+
+    $('#follow-button').remove();
+  };
 
 }]);

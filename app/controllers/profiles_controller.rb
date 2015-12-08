@@ -13,7 +13,15 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    # return 404 if profile doesn't exist
+    @profile = Profile.where(:id => params[:id])[0]
+
+    respond_to do |format|
+      if @profile
+        format.json { render json: @profile }
+      else
+        format.json { render nothing: true, status: 404 }
+      end
+    end
   end
 
   def update
