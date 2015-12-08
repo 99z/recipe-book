@@ -8,6 +8,10 @@ recipeBook.controller('dashboardCtrl', ['$scope', '$location', 'Restangular', 'A
     $scope.following = [];
     $scope.followers = [];
 
+    Restangular.all('newsfeeds').getList().then(function(newsfeed) {
+      $scope.newsfeed = newsfeed;
+    });
+
     Restangular.all('followerships').getList().then(function(followerships) {
 
       var following = followerships.filter(function(f) {
@@ -67,9 +71,10 @@ recipeBook.controller('dashboardCtrl', ['$scope', '$location', 'Restangular', 'A
       });
     };
 
-    Restangular.all('newsfeeds').getList().then(function(newsfeed) {
-      console.log(newsfeed);
-      $scope.newsfeed = newsfeed;
-    });
+    $scope.addRecipe = function(recipe) {
+      console.log(recipe);
+      recipe.user_id = $scope.currentUser.id;
+      Restangular.all('recipes').post(recipe);
+    };
 
 }]);
