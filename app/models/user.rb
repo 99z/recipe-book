@@ -36,7 +36,8 @@ class User < ActiveRecord::Base
                                "activity" => "added a recipe for " + recipe.title,
                                "date" => recipe.created_at,
                                "type" => "recipe",
-                               "target" => recipe]
+                               "target" => JSON.parse(recipe.to_json(include: [:ingredients, :instructions]))
+]
         activity << recipe_activity
       end
 

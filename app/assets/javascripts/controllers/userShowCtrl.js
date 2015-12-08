@@ -49,8 +49,9 @@ recipeBook.controller('userShowCtrl', ['$scope', '$location', '$stateParams', 'R
   };
 
   $scope.newRecipe = function() {
-    Restangular.all('recipes').create().then(function(recipe) {
-      $location.path('recipes/' + recipe.data.id);
+    Restangular.all('recipes').post().then(function(recipe) {
+      console.log(recipe);
+      $location.path('recipes/' + recipe.id);
     });
   };
 

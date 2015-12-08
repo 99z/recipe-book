@@ -8,12 +8,19 @@ class RecipesController < ApplicationController
 
 
   def create
-    @recipe = current_user.recipes.create!
-    @recipe.instructions.create!
-    @recipe.ingredients.create!
+    if params
+      @new_recipe = current_user.recipes.create!
+      @new_recipe.ingredients.create!
+      @new_recipe.instructions.create!
+    else
+      old_recipe = Recipe.find(params[:id])
+      @new_recipe = old_recipe.copy_recipe(current_user)
+    end
+
+    @new_recipe.save!
 
     respond_to do |format|
-      format.json { render json: @recipe.to_json(:include => [:instructions, :ingredients]), status: 201 }
+      format.json { render json: @new_recipe.to_json(:include => [:instructions, :ingredients]), status: 201 }
     end
   end
 
@@ -71,6 +78,9 @@ class RecipesController < ApplicationController
         elsif site == "www.epicurious.com"
           Rake::Task['recipes:scrape_epicurious'].invoke(@recipe)
           Rake::Task['recipes:scrape_epicurious'].reenable
+        elsif site == "www.foodnetwork.com"
+          Rake::Task['recipes:scrape_fn'].invoke(@recipe)
+          Rake::Task['recipes:scrape_fn'].reenable
         end
         @recipe = Recipe.where(:id => params[:id])[0]
       end
@@ -105,14 +115,15 @@ class RecipesController < ApplicationController
 
   private
 
+
     def recipe_params
       params.require(:recipe).permit( :title,
                                       :author,
                                       :photo_url,
                                       :description,
                                       :url,
-                                      :ingredients_attributes => [:id, :name],
-                                      :instructions_attributes => [:id, :body])
+                                      :ingredients_attributes => [:id, :body, :recipe_id],
+                                      :instructions_attributes => [:id, :body, :recipe_id])
     end
 
 
