@@ -32,6 +32,7 @@ class User < ActiveRecord::Base
     self.following.each do |user|
       user.recipes.each do |recipe|
         recipe_activity = Hash["author" => user.profile,
+                               "author_avatar" => user.profile.avatar,
                                "activity" => "added a recipe for " + recipe.title,
                                "date" => recipe.created_at,
                                "type" => "recipe",
@@ -41,6 +42,7 @@ class User < ActiveRecord::Base
 
       user.active_followerships.each do |follow|
         follow_activity = Hash["author" => user.profile,
+                               "author_avatar" => user.profile.avatar,
                                "activity" => "started following " + User.find(follow.followed_id).profile.full_name,
                                "date" => follow.created_at,
                                "type" => "follow",

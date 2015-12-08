@@ -4,7 +4,7 @@ RecipeBook::Application.load_tasks
 
 class RecipesController < ApplicationController
 
-  before_action :require_current_user, :except => [:index, :show]
+  before_action :require_current_user, :except => [:index, :show, :create]
 
 
   def create
@@ -20,7 +20,7 @@ class RecipesController < ApplicationController
 
   def index
     @recipes = Recipe.where("user_id = ?", current_user.id)
-    
+
     respond_to do |format|
       if @recipes
         format.json { render json: @recipes }
