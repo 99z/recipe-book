@@ -73,7 +73,7 @@
 
         <h4>Directions</h4>
 
-        <p ng-repeat='instruction in recipe.instructions' ng-mouseenter='showAddNote(instruction)' ng-mouseleave='hideAddNotes()'>
+        <p ng-repeat="instruction in recipe.instructions | orderBy:'id'" ng-mouseenter='showAddNote(instruction)' ng-mouseleave='hideAddNotes()'>
           <span editable-textarea='instruction.body' e-rows="4" onaftersave='updateRecipe()'>
             {{ instruction.body }}
           </span>
@@ -94,7 +94,7 @@
         <h4>Ingredients</h4>
 
         <table class='table table-condensed'>
-          <tr ng-repeat='ingredient in recipe.ingredients' ng-mouseenter='showAddNote(ingredient)' ng-mouseleave='hideAddNotes()'>
+          <tr ng-repeat="ingredient in recipe.ingredients  | orderBy:'id'" ng-mouseenter='showAddNote(ingredient)' ng-mouseleave='hideAddNotes()'>
             <td editable-textarea='ingredient.body' e-rows="2" onaftersave='updateRecipe()'>{{ ingredient.body }}</td>
             <td>
               <a href ng-if='ingredient.notes.length > 0' ng-click="openModal(ingredient, 'Ingredient')" title='{{ noteCount(ingredient) }}'>
@@ -140,7 +140,7 @@
 
       <div class='col-sm-8'>
         <h4>Directions</h4>
-        <p ng-repeat='instruction in recipe.instructions'>
+        <p ng-repeat="instruction in recipe.instructions | orderBy:'id'">
           <span>
             {{ instruction.body }}
           </span>
@@ -155,7 +155,7 @@
         <h4>Ingredients</h4>
 
         <table class='table table-condensed'>
-          <tr ng-repeat='ingredient in recipe.ingredients'>
+          <tr ng-repeat="ingredient in recipe.ingredients | orderBy:'id'">
             <td>{{ ingredient.body }}</td>
             <td>
               <a href ng-if='ingredient.notes.length > 0' ng-click="openModal(ingredient, 'Ingredient')" title='{{ noteCount(ingredient) }}'>
