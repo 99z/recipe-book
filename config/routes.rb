@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       resources :newsfeeds, only: [:index]
       resources :profiles
       resources :notes, only: [:create, :update, :destroy]
+      resources :shares, only: [:create, :destroy]
     end
   end
 end
