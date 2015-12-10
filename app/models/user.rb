@@ -15,6 +15,14 @@ class User < ActiveRecord::Base
   has_many :following, through: :active_followerships, source: :followed
   has_many :followers, through: :passive_followerships, source: :follower
 
+  has_many :outgoing_shares, class_name: "Share",
+                             foreign_key: "sharer_id",
+                             dependent: :destroy
+  has_many :incoming_shares, class_name: "Share",
+                             foreign_key: "recipient_id",
+                             dependent: :destroy
+
+
   def follow(other_user)
     active_followerships.create(followed_id: other_user.id)
   end
