@@ -57,6 +57,14 @@ recipeBook.controller('recipesCtrl', ['$scope', '$state', '$window', 'Restangula
   };
 
 
+  $scope.addComponent = function(className) {
+    Restangular.one('recipes', $scope.recipe.id).all(className).post()
+      .then( function(response) {
+        $scope.recipe[className].push(response);
+      });
+  };
+
+
   $scope.showAddNote = function(notable) {
     $scope.hovered = notable;
   };
