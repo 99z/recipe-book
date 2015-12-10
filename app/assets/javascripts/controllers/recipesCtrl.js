@@ -3,10 +3,16 @@ recipeBook.controller('recipesCtrl', ['$scope', '$state', '$window', 'Restangula
   $scope.recipe = recipe;
   $scope.scraperActive = false;
 
-  Auth.currentUser().then( function(user) {
-    $scope.currentUser = user;
-    $scope.owner = $scope.checkOwner(user);
-  });
+
+  if (Auth.isAuthenticated()) {
+    Auth.currentUser().then( function(user) {
+      $scope.currentUser = user;
+      $scope.owner = $scope.checkOwner(user);
+      console.log(user);
+    })
+  } else {
+    $scope.owner = false;
+  };
 
 
   $scope.checkOwner = function(user) {
