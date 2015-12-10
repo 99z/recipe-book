@@ -98,7 +98,7 @@ Rails.application.configure do
     }
   }
 
-  config.action_mailer.default_url_options = { :host => 'yoursite.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'https://floating-sands-2427.herokuapp.com' }
 
   # May need this if heroku throws 'Missing host to link to' error
   # Rails.application.routes.default_url_options[:host] = 'yoursite.herokuapp.com'
