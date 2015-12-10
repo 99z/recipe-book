@@ -71,7 +71,7 @@
 
       <div class='col-sm-8'>
 
-        <h4>Directions</h4>
+        <h4>Instructions</h4>
 
         <p ng-repeat="instruction in recipe.instructions | orderBy:'id'" ng-mouseenter='showAddNote(instruction)' ng-mouseleave='hideAddNotes()'>
           <span editable-textarea='instruction.body' e-rows="4" onaftersave='updateRecipe()'>
@@ -85,6 +85,7 @@
             + add a note
           </a>
         </p>
+        <p><a>+ add an instruction</a></p>
 
       </div>
 
@@ -94,18 +95,24 @@
         <h4>Ingredients</h4>
 
         <table class='table table-condensed'>
-          <tr ng-repeat="ingredient in recipe.ingredients  | orderBy:'id'" ng-mouseenter='showAddNote(ingredient)' ng-mouseleave='hideAddNotes()'>
-            <td editable-textarea='ingredient.body' e-rows="2" onaftersave='updateRecipe()'>{{ ingredient.body }}</td>
-            <td>
-              <a href ng-if='ingredient.notes.length > 0' ng-click="openModal(ingredient, 'Ingredient')" title='{{ noteCount(ingredient) }}'>
-                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-              </a>
-              <a href data-add-note='ingredient.id' ng-if='ingredient.notes.length == 0 && isHovered(ingredient)' ng-click="openModal(ingredient, 'Ingredient')" title='add a note'>
-                <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
-              </a>
-            </td>
-          </tr>
+          <tbody>
+            <tr ng-repeat="ingredient in recipe.ingredients  | orderBy:'id'" ng-mouseenter='showAddNote(ingredient)' ng-mouseleave='hideAddNotes()'>
+              <td editable-textarea='ingredient.body' e-rows="2" onaftersave='updateRecipe()'>{{ ingredient.body }}</td>
+              <td>
+                <a href ng-if='ingredient.notes.length > 0' ng-click="openModal(ingredient, 'Ingredient')" title='{{ noteCount(ingredient) }}'>
+                  <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                </a>
+                <a href data-add-note='ingredient.id' ng-if='ingredient.notes.length == 0 && isHovered(ingredient)' ng-click="openModal(ingredient, 'Ingredient')" title='add a note'>
+                  <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <td><a>+ add an ingredient</a></td>
+          </tfoot>
         </table>
+
 
       </div>
 
