@@ -88,7 +88,7 @@ Rails.application.configure do
       # put your host name here if needed
       #   see the reading below for more details
       # NOTE: This must be the correct region for YOU
-      :s3_host_name => "s3-us-east-1.amazonaws.com",
+      :s3_host_name => "s3-us-west-1.amazonaws.com",
 
       # NOTE: these lines are changed to use secrets.yml
       # from the examples (which use ENV vars instead)
@@ -98,10 +98,10 @@ Rails.application.configure do
     }
   }
 
-  config.action_mailer.default_url_options = { :host => 'yoursite.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'https://floating-sands-2427.herokuapp.com' }
 
   # May need this if heroku throws 'Missing host to link to' error
-  # Rails.application.routes.default_url_options[:host] = 'yoursite.herokuapp.com'
+  Rails.application.routes.default_url_options[:host] = 'https://floating-sands-2427.herokuapp.com'
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true

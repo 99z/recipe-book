@@ -3,10 +3,12 @@ recipeBook.controller('recipesCtrl', ['$scope', '$state', '$window', 'Restangula
   $scope.recipe = recipe;
   $scope.scraperActive = false;
 
+
   Auth.currentUser().then( function(user) {
     $scope.currentUser = user;
     $scope.owner = $scope.checkOwner(user);
-  });
+  })
+/* need interceptor! */
 
 
   $scope.checkOwner = function(user) {
@@ -90,6 +92,20 @@ recipeBook.controller('recipesCtrl', ['$scope', '$state', '$window', 'Restangula
   };
 
 
+  $scope.shareRecipe = function(recipe) {
+    ModalService.showModal({
+      templateUrl: "templates/recipes/shareModal.html",
+      controller: "ShareModalController",
+      inputs: {
+        recipe: recipe
+      }
+    }).then(function(modal) {
+      modal.element.modal();
+      modal.close.then(function(result) {
+        //console.log(result);
+      });
+    });
+  };
 
 
   $scope.openModal = function(notable, type) {

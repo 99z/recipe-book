@@ -11,6 +11,10 @@
       </div>
 
       <div class='col-xs-6 pull-right text-right'>
+        <button class='btn' ng-click='shareRecipe()' ng-if='owner'>
+          <span class='glyphicon glyphicon-share'></span>
+        </button>
+
         <button class='btn' ng-click='printRecipe()'>
           <span class='glyphicon glyphicon-print'></span>
         </button>
