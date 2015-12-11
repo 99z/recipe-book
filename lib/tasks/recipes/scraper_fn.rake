@@ -22,15 +22,15 @@ namespace :recipes do
       # instructions
       recipe.instructions.delete_all
       page.search('div[itemprop=recipeInstructions] > p:not(.copyright)').children.each_with_index do |step, index|
-        recipe.instructions.build(body: step.text.strip) unless step.text.strip.to_s.empty?
+        recipe.instructions.build(body: step.text.strip.gsub( /<.+?>/, " ")) unless step.text.strip.to_s.empty?
       end
 
       recipe.author = page.search('div[itemprop=author] span[itemprop=name]').text.strip
 
       # ingredients
       recipe.ingredients.delete_all
-      page.search('li[itemprop=ingredients]')[0].each_with_index do |step, index|
-        recipe.ingredients.build(name: step.text.strip.gsub(/\s+/, " ")) unless step.text.strip.to_s.empty?
+      page.search('li[itemprop=ingredients]').each_with_index do |step, index|
+        recipe.ingredients.build(body: step.text.strip.gsub(/\s+/, " ")) unless step.text.strip.to_s.empty?
       end
 
       recipe.photo_url = page.search("img[itemprop=image]").attribute('src')
