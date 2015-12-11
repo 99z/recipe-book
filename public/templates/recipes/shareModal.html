@@ -18,7 +18,12 @@
         <div class="modal-body-section">
           <h4>Users</h4>
 
-          <!-- users select -->
+          <div>
+            <select class="form-control" ng-model="selectedUser">
+              <option ng-repeat="user in allFollowing" value="{{user.id}}">{{ user.profile.first_name }} {{ user.profile.last_name }}</option>
+            </select>
+            <button type="button" ng-click="shareRecipe()" class="btn btn-primary text-right" data-dismiss="modal">Share recipe</button>
+          </div>
         </div>
 
       </div>

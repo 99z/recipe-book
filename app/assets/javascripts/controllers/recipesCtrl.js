@@ -84,12 +84,12 @@ recipeBook.controller('recipesCtrl', ['$scope', '$state', '$window', 'Restangula
   };
 
 
-  $scope.shareRecipe = function(recipe) {
+  $scope.shareRecipe = function() {
     ModalService.showModal({
       templateUrl: "templates/recipes/shareModal.html",
       controller: "ShareModalController",
       inputs: {
-        recipe: recipe
+        recipe: $scope.recipe
       }
     }).then(function(modal) {
       modal.element.modal();

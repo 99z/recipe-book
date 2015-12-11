@@ -1,20 +1,39 @@
 recipeBook.controller('ShareModalController',
-  ['$scope', '$window', 'recipe', 'close', 'Restangular',
-  function($scope, $window, recipe, close, Restangular) {
+  ['$scope', '$window', 'Auth', 'recipe', 'close', 'Restangular',
+  function($scope, $window, Auth, recipe, close, Restangular) {
 
+    $scope.allFollowing = [];
 
-    $scope.deleteNote = function(note, index) {
-      Restangular.one('notes',note.id).remove()
-        .then( function() {
-          $scope.notable.notes.splice(index, 1);
-        });
-    };
+    Auth.currentUser().then( function(user) {
+        $scope.currentUser = user;
+      });
 
+    Restangular.all('followerships').getList().then(function(followerships) {
+      following = followerships.filter(function(f) {
+        return f.follower_id == $scope.currentUser.id;
+      });
 
-    $scope.addNote = function() {
-      Restangular.all('notes').post({notable: notable, notable_type: notable_type})
+      following.forEach(function(following) {
+
+        var user = Restangular
+               .one('users', following.followed_id)
+               .get()
+               .$object;
+
+        user.profile = Restangular
+                       .one('profiles', following.followed_id)
+                       .get()
+                       .$object;
+
+        $scope.allFollowing.push(user);
+
+      });
+    });
+
+    $scope.shareRecipe = function() {
+      Restangular.all('shares').post({recipe_id: recipe.id, recipient_id: $scope.selectedUser})
         .then(function(response) {
-          $scope.notable.notes.push(response);
+          close();
         });
     };
 

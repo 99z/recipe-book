@@ -26,7 +26,7 @@
       <br />
 
       <p class="recipe-count"><strong>Number of recipes: </strong> {{ recipes.length }}</p>
-      <button type="button" class="btn btn-primary pull-right" ng-click="deleteAccount()">Delete account?</button>
+      <button type="button" class="btn btn-primary pull-right" ng-click="deleteAccount(); removeAcct()">Delete account?</button>
     </div>
 
     <div name="profile-info" class="col-xs-8" ng-if="currentUserID != currentProfileID">
