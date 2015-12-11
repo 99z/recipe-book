@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151210023921) do
+ActiveRecord::Schema.define(version: 20151211035511) do
 
   create_table "followerships", force: :cascade do |t|
     t.integer  "followed_id"
@@ -45,12 +45,12 @@ ActiveRecord::Schema.define(version: 20151210023921) do
   end
 
   create_table "profiles", force: :cascade do |t|
-    t.integer  "user_id",             null: false
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "location"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.integer  "user_id",                                    null: false
+    t.string   "first_name",          default: "First Name", null: false
+    t.string   "last_name",           default: "Last Name",  null: false
+    t.string   "location",            default: "???",        null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
