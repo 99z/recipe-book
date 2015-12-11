@@ -26,6 +26,8 @@ recipeBook.controller('recipesCtrl', ['$scope', '$state', '$window', 'Restangula
       Restangular.one('recipes', $scope.recipe.id).patch($scope.scraper)
         .then(function(response){
           $scope.recipe = response;
+          $scope.scraperActive = false;
+          $scope.scraper.url = "";
       });
     }
   };

@@ -10,10 +10,14 @@ Profile.delete_all
 Recipe.delete_all
 Ingredient.delete_all
 Instruction.delete_all
+Note.delete_all
+Followership.delete_all
+Share.delete_all
 
 
 
-SEED_MULTIPLER = 1
+SEED_MULTIPLIER = 1
+SQRT_MULTIPLIER = Math.sqrt(SEED_MULTIPLIER).to_i
 
 
 NYT_RECIPE_URLS = [
@@ -48,7 +52,7 @@ foobar.create_profile(:first_name => "Foo",
 
 
 # Build other users
-(5*SEED_MULTIPLER).times do
+(5*SEED_MULTIPLIER).times do
 
   first_name = Faker::Name.first_name
   last_name = Faker::Name.last_name
@@ -77,12 +81,22 @@ def scrape(recipe)
 end
 
 
-# Add some recipes for each user
 User.all.each do |user|
 
-  (rand(2..4)*SEED_MULTIPLER).times do
+  # Add some recipes for each user
+  (rand(2..4)*SQRT_MULTIPLIER).times do
     recipe = user.recipes.create(:url => ALL_URLS.sample)
     scrape(recipe)
   end
+
+
+  # Make each user follow some other users
+  user.following << User.all.sample(rand(0..3)*SQRT_MULTIPLIER)
+
+
+  # Make each user share a recipe
+  user.outgoing_shares.create(recipe_id: user.recipes.sample.id,
+                              recipient_id: user.following.sample.id
+                              ) unless user.following.empty?
 
 end
