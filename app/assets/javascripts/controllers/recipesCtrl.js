@@ -74,9 +74,13 @@ recipeBook.controller('recipesCtrl', ['$scope', '$state', '$window', 'Restangula
   };
 
 
+  $scope.notesEmpty = function(notable) {
+    return (notable.notes == undefined || notable.notes.length == 0);
+  };
+
   $scope.isHovered = function(notable) {
-    return (notable == $scope.hovered)
-  }
+    return (notable == $scope.hovered);
+  };
 
 
   $scope.hideAddNotes = function() {

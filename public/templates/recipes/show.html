@@ -82,10 +82,10 @@
             {{ instruction.body }}
           </span>
 
-          <a href ng-if='instruction.notes.length > 0' ng-click="openModal(instruction, 'Instruction')">
+          <a href ng-if='!notesEmpty(instruction)' ng-click="openModal(instruction, 'Instruction')">
             {{ noteCount(instruction) }}
           </a>
-          <a href ng-if='instruction.notes.length == 0 && isHovered(instruction)' ng-click="openModal(instruction, 'Instruction')">
+          <a href ng-if='notesEmpty(instruction) && isHovered(instruction)' ng-click="openModal(instruction, 'Instruction')">
             + add a note
           </a>
         </p>
@@ -103,10 +103,10 @@
             <tr ng-repeat="ingredient in recipe.ingredients  | orderBy:'id'" ng-mouseenter='showAddNote(ingredient)' ng-mouseleave='hideAddNotes()'>
               <td editable-textarea='ingredient.body' e-rows="2" onaftersave='updateRecipe()'>{{ ingredient.body }}</td>
               <td>
-                <a href ng-if='ingredient.notes.length > 0' ng-click="openModal(ingredient, 'Ingredient')" title='{{ noteCount(ingredient) }}'>
+                <a href ng-if='!notesEmpty(ingredient)' ng-click="openModal(ingredient, 'Ingredient')" title='{{ noteCount(ingredient) }}'>
                   <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
                 </a>
-                <a href data-add-note='ingredient.id' ng-if='ingredient.notes.length == 0 && isHovered(ingredient)' ng-click="openModal(ingredient, 'Ingredient')" title='add a note'>
+                <a href data-add-note='ingredient.id' ng-if='notesEmpty(ingredient) && isHovered(ingredient)' ng-click="openModal(ingredient, 'Ingredient')" title='add a note'>
                   <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
                 </a>
               </td>
@@ -156,7 +156,7 @@
             {{ instruction.body }}
           </span>
 
-          <a href ng-if='instruction.notes.length > 0' ng-click="openModal(instruction, 'Instruction')">
+          <a href ng-if='!notesEmpty(instruction)' ng-click="openModal(instruction, 'Instruction')">
             {{ noteCount(instruction) }}
           </a>
         </p>
@@ -169,7 +169,7 @@
           <tr ng-repeat="ingredient in recipe.ingredients | orderBy:'id'">
             <td>{{ ingredient.body }}</td>
             <td>
-              <a href ng-if='ingredient.notes.length > 0' ng-click="openModal(ingredient, 'Ingredient')" title='{{ noteCount(ingredient) }}'>
+              <a href ng-if='!notesEmpty(ingredient)' ng-click="openModal(ingredient, 'Ingredient')" title='{{ noteCount(ingredient) }}'>
                 <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
               </a>
             </td>
