@@ -36,7 +36,8 @@
       <br />
       <p class="recipe-count"><strong>Number of recipes: </strong> {{ recipes.length }}</p>
       <div id="follow-button">
-        <button type="button" class="btn btn-primary pull-right" ng-click="follow(profile.user_id)" ng-if="alreadyFollowed">Follow</button>
+        <button type="button" class="btn btn-primary pull-right" ng-click="follow(profile.user_id)" ng-hide="!alreadyFollowed">Follow</button>
+        <button type="button" class="btn btn-primary pull-right" ng-click="unfollow(profile.user_id)" ng-hide="alreadyFollowed">Unfollow</button>
       </div>
     </div>
 
