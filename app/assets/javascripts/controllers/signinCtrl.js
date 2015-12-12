@@ -1,4 +1,4 @@
-recipeBook.controller('signinCtrl', ['$scope', 'Restangular', 'Auth', '$location', '$http', function($scope, Restangular, Auth, $location, $http){
+recipeBook.controller('signinCtrl', ['$scope', '$window', 'Restangular', 'Auth', '$location', '$http', function($scope, $window, Restangular, Auth, $location, $http){
 
   $scope.credentials = {};
   $scope.recover = false;
@@ -11,15 +11,19 @@ recipeBook.controller('signinCtrl', ['$scope', 'Restangular', 'Auth', '$location
     };
 
     Auth.login($scope.credentials).then(function(user) {
-      // console.log(user);
+      $window.location.reload();
     }, function(error) {
       //auth failed
     });
   };
 
-  $scope.$on('devise:login', function(event, currentUser){
+  // $scope.$on('devise:login', function(event, currentUser){
+  //   // $location.path("/dashboard/index");
+  // });
+
+  $scope.updatePage = function() {
     $location.path("/dashboard/index");
-  });
+  };
 
   var jumboHeight = $('.jumbotron').outerHeight();
 
