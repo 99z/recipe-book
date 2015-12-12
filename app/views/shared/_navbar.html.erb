@@ -3,14 +3,13 @@
 
 
   <div class='pull-right'>
+
     <%= menu_group :pull => :right do %>
       <%= menu_item "#{current_user.email}", "#/users/#{current_user.id}" %>
       <%= menu_item "Log Out", destroy_user_session_path, :method => :delete %>
     <% end %>
 
-
-  <!-- hide this on < 940px -->
-    <%= link_to "#/users/#{current_user.id}" do %>
+    <%= link_to "#/users/#{current_user.id}", class: "hidden-xs" do %>
       <%= image_tag current_user.profile.avatar.url(:thumb), class: "img img-thumbnail" %>
     <% end %>
 
