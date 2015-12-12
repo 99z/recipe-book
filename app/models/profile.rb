@@ -5,6 +5,7 @@ class Profile < ActiveRecord::Base
   # You'll want to make sure you've whitelisted only acceptable
   # content types to avoid attacks
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+  validates_attachment_size :avatar, less_than: 1.megabytes
 
   def full_name
     self.first_name + " " + self.last_name
