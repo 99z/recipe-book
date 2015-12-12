@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151211035511) do
+ActiveRecord::Schema.define(version: 20151212174918) do
 
   create_table "followerships", force: :cascade do |t|
     t.integer  "followed_id"
@@ -58,12 +58,12 @@ ActiveRecord::Schema.define(version: 20151211035511) do
   end
 
   create_table "recipes", force: :cascade do |t|
-    t.string   "title",       default: "Add a title...",                                                              null: false
-    t.string   "author",      default: "Add an author...",                                                            null: false
-    t.string   "photo_url",   default: "https://placeholdit.imgix.net/~text?txtsize=30&txt=320%C3%97320&w=320&h=320"
-    t.integer  "user_id",                                                                                             null: false
-    t.datetime "created_at",                                                                                          null: false
-    t.datetime "updated_at",                                                                                          null: false
+    t.string   "title",       default: "Add a title...",           null: false
+    t.string   "author",      default: "Add an author...",         null: false
+    t.string   "photo_url",   default: "/images/pacman-pizza.jpg"
+    t.integer  "user_id",                                          null: false
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
     t.string   "description", default: "Add a description..."
     t.string   "url"
   end
