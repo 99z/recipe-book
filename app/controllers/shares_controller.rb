@@ -3,10 +3,12 @@ class SharesController < ApplicationController
   def create
     @share = current_user.outgoing_shares.build(share_params)
 
-    if @share.save
-      format.json { render json: @share, status: 200 }
-    else
-      format.json { render nothing: true, status: 404 }
+    respond_to do |format|
+      if @share.save
+        format.json { render json: @share, status: 200 }
+      else
+        format.json { render nothing: true, status: 404 }
+      end
     end
 
   end

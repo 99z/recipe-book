@@ -1,10 +1,11 @@
-recipeBook.controller('userShowCtrl', ['$scope', '$location', '$stateParams', 'Restangular', 'Auth', 'user', '$http', function($scope, $location, $stateParams, Restangular, Auth, user, $http){
+recipeBook.controller('userShowCtrl', ['$scope', '$location', '$window', '$stateParams', 'Restangular', 'Auth', 'user', '$http', function($scope, $location, $window, $stateParams, Restangular, Auth, user, $http){
 
   $scope.user = user;
 
   Auth.currentUser().then(function(user) {
     $scope.currentUser = user;
     $scope.currentUserID = user.id;
+    $scope.userCopy = $.extend({}, $scope.currentUser);
   });
 
   $scope.currentProfileID = $stateParams.userId;
@@ -42,9 +43,24 @@ recipeBook.controller('userShowCtrl', ['$scope', '$location', '$stateParams', 'R
   };
 
   $scope.deleteAccount = function() {
-    Restangular.all('users').getList().then(function(users) {
-      user = _.find(users, function(u) { return u.id == $scope.currentUser.id; });
-      user.remove();
+
+    var config = {
+      headers: {
+        'X-HTTP-Method-Override': 'DELETE'
+      }
+    };
+
+    Auth.logout(config).then(function(user) {
+      $window.location.reload();
+    }, function(error) {
+      //auth failed
+    });
+  };
+
+  $scope.removeAcct = function() {
+    $location.path("/");
+    Restangular.one('users', $scope.userCopy.id).remove().then(function() {
+      alert("Your account has been deleted.");
     });
   };
 

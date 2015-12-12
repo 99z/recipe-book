@@ -58,6 +58,16 @@ class User < ActiveRecord::Base
                                "target" => User.find(follow.followed_id).profile]
         activity << follow_activity
       end
+
+      self.incoming_shares.each do |share|
+        share_activity = Hash[ "author" => share.sharer.profile,
+                               "author_avatar" => share.sharer.profile.avatar,
+                               "activity" => "shared their recipe for " + share.recipe.title + "with you!",
+                               "date" => share.created_at,
+                               "type" => "share",
+                               "target" => share.recipe]
+        activity << share_activity
+      end
     end
 
     activity.last(20).reverse
