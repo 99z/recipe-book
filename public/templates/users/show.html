@@ -5,7 +5,7 @@
     <div name="harold" class="col-xs-4">
       <img ng-src="{{profile.avatar}}" class="img-responsive">
 
-      <form name='avatarForm' ng-submit="updateProfile()">
+      <form name='avatarForm' ng-submit="updateProfile()" ng-if="currentUserID == currentProfileID">
         <input type="file" name="avatar" onchange="angular.element(this).scope().uploadFile(this.files)">
       </form>
 
