@@ -10,8 +10,8 @@ class RecipesController < ApplicationController
   def create
     if params
       @new_recipe = current_user.recipes.create!
-      @new_recipe.ingredients.create!
-      @new_recipe.instructions.create!
+      #@new_recipe.ingredients.create!
+      #@new_recipe.instructions.create!
     else
       old_recipe = Recipe.find(params[:id])
       @new_recipe = old_recipe.copy_recipe(current_user)

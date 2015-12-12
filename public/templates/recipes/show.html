@@ -4,13 +4,13 @@
 
     <div class='row control-buttons'>
 
-      <div class='col-xs-6 pull-left' ng-hide='scraperActive || owner == false'>
+      <div class='col-md-6 pull-left' ng-hide='scraperActive || owner == false'>
         <button class='btn btn-primary' ng-click="toggleScraper()">
           Import URL
         </button>
       </div>
 
-      <div class='col-xs-6 pull-right text-right'>
+      <div class='col-md-6 pull-right text-right'>
         <button class='btn' ng-click='shareRecipe()' ng-if='owner'>
           <span class='glyphicon glyphicon-share'></span>
         </button>
@@ -89,7 +89,7 @@
             + add a note
           </a>
         </p>
-        <p><a href ng-click="addComponent('instructions')">+ add an instruction</a></p>
+        <p><a href ng-click="addComponent('instructions')">+ add a new instruction</a></p>
 
       </div>
 
@@ -113,7 +113,7 @@
             </tr>
           </tbody>
           <tfoot>
-            <td><a href ng-click="addComponent('ingredients')">+ add an ingredient</a></td>
+            <td><a href ng-click="addComponent('ingredients')">+ add a new ingredient</a></td>
           </tfoot>
         </table>
 
