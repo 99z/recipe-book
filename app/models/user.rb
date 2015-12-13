@@ -70,6 +70,7 @@ class User < ActiveRecord::Base
       end
     end
 
+    activity.sort! { |a,b| a['date'] <=> b['date']}
     activity.last(20).reverse
   end
 end
