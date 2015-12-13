@@ -30,9 +30,9 @@ recipeBook.controller('ShareModalController',
       });
     });
 
-    $scope.shareRecipe = function() {
+    $scope.shareRecipe = function(close) {
       Restangular.all('shares').post({recipe_id: recipe.id, recipient_id: $scope.selectedUser})
-        .then(function(response) {
+        .then(function() {
           close();
         });
     };

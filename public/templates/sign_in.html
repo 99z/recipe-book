@@ -21,7 +21,6 @@
           <input type="text" class="form-control" placeholder="Email" ng-model='credentials.email'>
           <br />
           <input type="password" class="form-control" placeholder="Password" ng-model='credentials.password'>
-          <br />
           <!-- Remember Me checkbox - hacky formatting since it's not wrapper in form tag -->
           <div class='form-group form-inline'>
             <label>
@@ -29,11 +28,11 @@
               Remember Me
             </label>
           </div>
-          <br>
-          <!--  -->
+
           <button class="btn btn-primary" ng-click="login(); updatePage()">We missed you!</button>
-          <br>
-          <a href class='pull-right' ng-click="toggleRecover()">Forgot your password?</a>
+          <br />
+          <br />
+          <a href ng-click="toggleRecover()">Forgot your password?</a>
         </div>
 
 

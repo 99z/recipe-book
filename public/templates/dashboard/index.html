@@ -18,7 +18,7 @@
             <p><strong>{{ follow.profile.first_name }} {{ follow.profile.last_name }}</strong></p>
             <p><strong>From: </strong>{{ follow.profile.location }}</p>
             <a href="/#/users/{{ follow.id }}" class="btn btn-primary">view profile</a>
-            <a href ng-click="unfollow(follow, $index)" class="btn btn-primary">unfollow</a>
+            <a href ng-click="unfollow(follow, $index)" class="btn btn-primary pull-right">unfollow</a>
           </div>
         </div>
 
@@ -62,7 +62,7 @@
         </div>
       </div>
 
-      <div ng-repeat="item in newsfeed">
+      <div ng-repeat="item in newsfeed" class="well">
 
         <div class="row">
           <div class="col-xs-12">
@@ -75,12 +75,14 @@
             <img ng-src="{{ item.author_avatar }}" class="img-responsive">
           </div>
 
-          <div class="col-xs-9" ng-if="item.type == 'recipe'">
+          <div class="col-xs-9 activity-content" ng-if="item.type == 'recipe'">
             <strong>{{ item.target.title }}</strong> by {{ item.author.first_name }} {{ item.author.last_name }}
 
             <br />
 
-            <em>link to original source: <a href="{{ item.target.url }}">click!</a></em>
+            <p><em>link to original source: <a href="{{ item.target.url }}">click!</a></em></p>
+
+            <br />
 
             <div class="row">
               <div class="col-xs-6">
@@ -93,28 +95,28 @@
             </div>
           </div>
 
-          <div class="col-xs-9" ng-if="item.type == 'follow'">
+          <div class="col-xs-9 activity-content" ng-if="item.type == 'follow'">
             <strong>{{ item.target.first_name }} {{ item.target.last_name}}</strong>
 
             <br />
 
-            <strong>From: </strong>{{ item.target.location }}
+            <p><strong>From: </strong>{{ item.target.location }}</p>
 
             <br />
 
             <div class="row">
               <div class="col-xs-12 text-center">
-                <a href="/#/users/{{item.target.id}}" class="btn btn-primary view">View profile</a>
+                <a href="/#/users/{{item.target.id}}" class="btn btn-primary btn-block view">View profile</a>
               </div>
             </div>
           </div>
 
-          <div class="col-xs-9" ng-if="item.type == 'share'">
+          <div class="col-xs-9 activity-content" ng-if="item.type == 'share'">
             <strong>{{ item.target.title }}</strong> by {{ item.author.first_name }} {{ item.author.last_name }}
 
             <br />
 
-            <em>link to original source: <a href="{{ item.target.url }}">click!</a></em>
+            <p><em>link to original source: <a href="{{ item.target.url }}">click!</a></em></p>
 
             <div class="row">
               <div class="col-xs-6">
