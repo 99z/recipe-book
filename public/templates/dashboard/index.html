@@ -1,42 +1,111 @@
-<h1>Followed Users</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
 
-<div class="row following">
+      <h1 class="text-center">Followed Users</h1>
 
-  <div ng-repeat="follow in following | filter:filterText" class="item">
+      <div class="row following">
 
-    <div class="well">
-      <div class="follow-img">
-        <img class="img-responsive" ng-src="{{ follow.profile.avatar }}">
-        <!-- <a href class="btn btn-primary view">unfollow</a> -->
-        <!-- <a href="/#/users/{{ follow.id }}" class="btn btn-primary add">view profile</a> -->
+        <div ng-repeat="follow in following | filter:filterText" class="item">
+
+          <div class="well">
+            <div class="follow-img">
+              <img class="img-responsive" ng-src="{{ follow.profile.avatar }}">
+              <!-- <a href class="btn btn-primary view">unfollow</a> -->
+              <!-- <a href="/#/users/{{ follow.id }}" class="btn btn-primary add">view profile</a> -->
+            </div>
+
+            <p><strong>{{ follow.profile.first_name }} {{ follow.profile.last_name }}</strong></p>
+            <p><strong>From: </strong>{{ follow.profile.location }}</p>
+            <a href="/#/users/{{ follow.id }}" class="btn btn-primary">view profile</a>
+            <a href ng-click="unfollow(follow, $index)" class="btn btn-primary">unfollow</a>
+          </div>
+        </div>
+
       </div>
 
-      <p><strong>{{ follow.profile.first_name }} {{ follow.profile.last_name }}</strong></p>
-      <p><strong>From: </strong>{{ follow.profile.location }}</p>
-      <a href="/#/users/{{ follow.id }}" class="btn btn-primary">view profile</a>
-      <a href ng-click="unfollow(follow, $index)" class="btn btn-primary">unfollow</a>
-    </div>
-  </div>
+      <h1>My Followers</h1>
 
-</div>
+      <div class="row following">
 
-<h1>My Followers</h1>
+        <div ng-repeat="follower in followers | filter:filterText" class="item">
 
-<div class="row following">
+          <div class="well">
+            <div class="follow-img">
+              <img class="img-responsive" ng-src="{{ follower.profile.avatar }}">
+              <!-- <a href class="btn btn-primary view">unfollow</a>
+              <a href="/#/users/{{ follower.id }}" class="btn btn-primary add">view profile</a> -->
+            </div>
 
-  <div ng-repeat="follower in followers | filter:filterText" class="item">
+            <p><strong>{{ follower.profile.first_name}} {{ follower.profile.last_name }}</strong></p>
+            <p><strong>From: </strong>{{ follower.profile.location }}</p>
+            <a href="/#/users/{{ follower.id }}" class="btn btn-primary">view profile</a>
+          </div>
+        </div>
 
-    <div class="well">
-      <div class="follow-img">
-        <img class="img-responsive" ng-src="{{ follower.profile.avatar }}">
-        <!-- <a href class="btn btn-primary view">unfollow</a>
-        <a href="/#/users/{{ follower.id }}" class="btn btn-primary add">view profile</a> -->
       </div>
 
-      <p><strong>{{ follower.profile.first_name}} {{ follower.profile.last_name }}</strong></p>
-      <p><strong>From: </strong>{{ follower.profile.location }}</p>
-      <a href="/#/users/{{ follower.id }}" class="btn btn-primary">view profile</a>
     </div>
-  </div>
 
+    <div class="col-sm-8">
+      <div class="row">
+        <div class="col-xs-12">
+          <h1 class="text-center">Activity Feed</h1>
+        </div>
+      </div>
+
+      <div ng-repeat="item in newsfeed">
+
+        <div class="row">
+          <div class="col-xs-12">
+            {{ item.author.first_name }} {{ item.author.last_name}} {{ item.activity }} on {{ item.date | date }}:
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-3">
+            <img ng-src="{{ item.author_avatar }}" class="img-responsive">
+          </div>
+
+          <div class="col-xs-9" ng-if="item.type == 'recipe'">
+            <strong>{{ item.target.title }}</strong> by {{ item.author.first_name }} {{ item.author.last_name }}
+
+            <br />
+
+            <em>link to original source: <a href="{{ item.target.url }}">click!</a></em>
+
+            <div class="row">
+              <div class="col-xs-6">
+                <a href="/#/recipes/{{item.target.id}}" class="btn btn-primary btn-block view">View recipe</a>
+              </div>
+
+              <div class="col-xs-6">
+                <a href ng-click="addRecipe(item.target)" class="btn btn-primary btn-block view">Add to my book</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xs-9" ng-if="item.type == 'follow'">
+            <strong>{{ item.target.first_name }} {{ item.target.last_name}}</strong>
+
+            <br />
+
+            <strong>From: </strong>{{ item.target.location }}
+
+            <br />
+
+            <div class="row">
+              <div class="col-xs-12 text-center">
+                <a href="/#/users/{{item.target.id}}" class="btn btn-primary view">View profile</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+
+  </div>
 </div>
