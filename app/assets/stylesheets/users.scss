@@ -46,6 +46,12 @@ div.recipe-img {
   margin:5px;
 }
 
+div.recipe-img img {
+  min-width: 225px;
+  min-height: 225px;
+  object-fit: fill;
+}
+
 div.recipe-img:hover img{
   opacity:0.5;
 }
