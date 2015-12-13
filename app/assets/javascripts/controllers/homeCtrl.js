@@ -1,4 +1,4 @@
-recipeBook.controller('homeCtrl', ['$scope', 'Restangular', 'Auth', '$location', function($scope, Restangular, Auth, $location){
+recipeBook.controller('homeCtrl', ['$scope', '$window', 'Restangular', 'Auth', '$location', function($scope, $window, Restangular, Auth, $location){
 
   $scope.credentials = {};
 
@@ -10,15 +10,15 @@ recipeBook.controller('homeCtrl', ['$scope', 'Restangular', 'Auth', '$location',
     };
 
     Auth.register($scope.credentials).then(function(user) {
-      // console.log(user);
+      $window.location.reload();
     }, function(error) {
       //auth failed
     });
   };
 
-  $scope.$on('devise:new-registration', function(event, currentUser){
+  $scope.updatePage = function() {
     $location.path("/dashboard/index");
-  });
+  };
 
   var jumboHeight = $('.jumbotron').outerHeight();
 
