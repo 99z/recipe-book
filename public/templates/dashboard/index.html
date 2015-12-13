@@ -13,7 +13,8 @@
 
       <p><strong>{{ follow.profile.first_name }} {{ follow.profile.last_name }}</strong></p>
       <p><strong>From: </strong>{{ follow.profile.location }}</p>
-      <a href ng-click="unfollow(follow, $index)">unfollow</a>
+      <a href="/#/users/{{ follow.id }}" class="btn btn-primary">view profile</a>
+      <a href ng-click="unfollow(follow, $index)" class="btn btn-primary">unfollow</a>
     </div>
   </div>
 
@@ -28,12 +29,13 @@
     <div class="well">
       <div class="follow-img">
         <img class="img-responsive" ng-src="{{ follower.profile.avatar }}">
-        <a href class="btn btn-primary view">unfollow</a>
-        <a href="/#/users/{{ follow.id }}" class="btn btn-primary add">view profile</a>
+        <!-- <a href class="btn btn-primary view">unfollow</a>
+        <a href="/#/users/{{ follower.id }}" class="btn btn-primary add">view profile</a> -->
       </div>
 
       <p><strong>{{ follower.profile.first_name}} {{ follower.profile.last_name }}</strong></p>
       <p><strong>From: </strong>{{ follower.profile.location }}</p>
+      <a href="/#/users/{{ follower.id }}" class="btn btn-primary">view profile</a>
     </div>
   </div>
 
