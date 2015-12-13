@@ -62,7 +62,7 @@ class User < ActiveRecord::Base
       self.incoming_shares.each do |share|
         share_activity = Hash[ "author" => share.sharer.profile,
                                "author_avatar" => share.sharer.profile.avatar,
-                               "activity" => "shared their recipe for " + share.recipe.title + "with you!",
+                               "activity" => "wants to share their recipe for " + share.recipe.title + "with you!",
                                "date" => share.created_at,
                                "type" => "share",
                                "target" => share.recipe]
@@ -70,6 +70,7 @@ class User < ActiveRecord::Base
       end
     end
 
+    activity.sort! { |a,b| a['date'] <=> b['date']}
     activity.last(20).reverse
   end
 end
