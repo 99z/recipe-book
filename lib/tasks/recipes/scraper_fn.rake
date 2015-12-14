@@ -21,7 +21,8 @@ namespace :recipes do
 
       # instructions
       recipe.instructions.delete_all
-      page.search('div[itemprop=recipeInstructions] > p:not(.copyright)').children.each_with_index do |step, index|
+      instructions = []
+      page.search('div[itemprop=recipeInstructions] > p:not(.copyright)').each_with_index do |step, index|
         recipe.instructions.build(body: step.text.strip.gsub( /<.+?>/, " ")) unless step.text.strip.to_s.empty?
       end
 
@@ -33,7 +34,14 @@ namespace :recipes do
         recipe.ingredients.build(body: step.text.strip.gsub(/\s+/, " ")) unless step.text.strip.to_s.empty?
       end
 
-      recipe.photo_url = page.search("img[itemprop=image]").attribute('src')
+      if !page.search(".single-photo-recipe img").empty?
+        recipe.photo_url = page.search(".single-photo-recipe img").attribute('src')
+      elsif !page.search("#video img").empty?
+        recipe.photo_url = page.search("#video img").attribute('src')
+      else
+        recipe.photo_url = nil
+      end
+
     end
 
     recipe.save!

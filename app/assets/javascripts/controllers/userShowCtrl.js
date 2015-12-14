@@ -15,7 +15,9 @@ recipeBook.controller('userShowCtrl', ['$scope', '$location', '$window', '$state
   });
 
   Restangular.all('recipes').getList().then(function(recipes) {
-    $scope.recipes = recipes;
+    $scope.recipes = $.grep(recipes, function(recipe) {
+      return recipe.user_id == $stateParams.userId;
+    });
   });
 
   Restangular.all('followerships').getList().then(function(followerships) {
