@@ -71,7 +71,7 @@ recipeBook.controller('dashboardCtrl', ['$scope', '$location', 'Restangular', 'A
       });
     };
 
-    $scope.addRecipe = function(recipe) {
+    $scope.addRecipe = function(recipe, $event) {
 /*      recipe.user_id = $scope.currentUser.id;
 
       var recipeNested = {};
@@ -80,6 +80,7 @@ recipeBook.controller('dashboardCtrl', ['$scope', '$location', 'Restangular', 'A
       recipeNested['recipe']['instructions_attributes'] = recipe.instructions;
 
       //console.log(recipe);*/
+      console.log($event);
       Restangular.all('recipes').post(recipe);
     };
 
