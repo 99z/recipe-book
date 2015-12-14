@@ -38,7 +38,16 @@ EPI_RECIPE_URLS = [
   "http://www.epicurious.com/recipes/food/views/spicy-shellfish-and-sausage-stew-108560"
 ]
 
-ALL_URLS = NYT_RECIPE_URLS + EPI_RECIPE_URLS
+FN_RECIPE_URLS = [
+  "http://www.foodnetwork.com/recipes/food-network-kitchens/shrimp-and-chorizo-stew-recipe.html",
+  "http://www.foodnetwork.com/recipes/food-network-kitchens/butternut-squash-soup-with-chicken-sausage-recipe.html",
+  "http://www.foodnetwork.com/recipes/food-network-kitchens/moussaka-recipe4.html",
+  "http://www.foodnetwork.com/recipes/patrick-and-gina-neely/fried-deviled-eggs-recipe.html",
+  "http://www.foodnetwork.com/recipes/ree-drummond/all-purpose-meatballs.html",
+  "http://www.foodnetwork.com/recipes/ina-garten/roasted-brussels-sprouts-recipe2.html"
+]
+
+ALL_URLS = NYT_RECIPE_URLS + EPI_RECIPE_URLS + FN_RECIPE_URLS
 
 
 
@@ -77,6 +86,9 @@ def scrape(recipe)
   elsif site == "www.epicurious.com"
     Rake::Task['recipes:scrape_epicurious'].invoke(recipe)
     Rake::Task['recipes:scrape_epicurious'].reenable
+  elsif site == "www.foodnetwork.com"
+    Rake::Task['recipes:scrape_fn'].invoke(recipe)
+    Rake::Task['recipes:scrape_fn'].reenable
   end
 end
 
