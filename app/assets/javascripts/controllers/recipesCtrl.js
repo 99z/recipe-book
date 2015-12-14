@@ -61,6 +61,14 @@ recipeBook.controller('recipesCtrl', ['$scope', '$state', '$window', 'Restangula
   };
 
 
+  $scope.copyRecipe = function() {
+    Restangular.all('recipes').post($scope.recipe)
+      .then( function(response) {
+        $state.go('recipes.show', {id: response.id});
+      })
+  };
+
+
   $scope.addComponent = function(className) {
     Restangular.one('recipes', $scope.recipe.id).all(className).post()
       .then( function(response) {

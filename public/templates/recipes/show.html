@@ -15,6 +15,10 @@
           <span class='glyphicon glyphicon-share'></span>
         </button>
 
+        <button class='btn' ng-click='copyRecipe()' ng-if='!owner'>
+          <span class='glyphicon glyphicon-plus'></span>
+        </button>
+
         <button class='btn' ng-click='printRecipe()'>
           <span class='glyphicon glyphicon-print'></span>
         </button>
