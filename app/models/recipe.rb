@@ -6,6 +6,8 @@ class Recipe < ActiveRecord::Base
 
   accepts_nested_attributes_for :ingredients, :instructions
 
+  before_save :verify_photo
+
 
   def copy_recipe(current_user)
     clone = self.dup
@@ -13,6 +15,11 @@ class Recipe < ActiveRecord::Base
     clone.ingredients = self.ingredients
     clone.instructions = self.instructions
     return clone
+  end
+
+
+  def verify_photo
+    self.photo_url = "/images/pacman-pizza.jpg" if self.photo_url.nil?
   end
 
 end

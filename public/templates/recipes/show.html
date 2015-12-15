@@ -68,7 +68,7 @@
       </div>
 
       <div class='col-md-4'>
-        <img ng-src="{{ recipe.photo_url }}" class='img img-responsive'>
+        <img ng-src="{{ recipe.photo_url }}" class='img img-responsive center-block'>
       </div>
 
     </div>
@@ -76,28 +76,8 @@
 
     <div class='row'>
 
-      <div class='col-md-8'>
 
-        <h4>Instructions</h4>
-
-        <p ng-repeat="instruction in recipe.instructions | orderBy:'id'" ng-mouseenter='showAddNote(instruction)' ng-mouseleave='hideAddNotes()'>
-          <span editable-textarea='instruction.body' e-rows="4" e-cols="80" onaftersave='updateRecipe()'>
-            {{ instruction.body }}
-          </span>
-
-          <a href ng-if='!notesEmpty(instruction)' ng-click="openModal(instruction, 'Instruction')">
-            {{ noteCount(instruction) }}
-          </a>
-          <a href ng-if='notesEmpty(instruction) && isHovered(instruction)' ng-click="openModal(instruction, 'Instruction')">
-            + add a note
-          </a>
-        </p>
-        <p><a href ng-click="addComponent('instructions')">+ add a new instruction</a></p>
-
-      </div>
-
-
-      <div class='col-md-4'>
+      <div class='col-md-4 col-md-push-8'>
 
         <h4>Ingredients</h4>
 
@@ -122,6 +102,27 @@
           </tfoot>
         </table>
 
+
+      </div>
+
+
+      <div class='col-md-8 col-md-pull-4'>
+
+        <h4>Instructions</h4>
+
+        <p ng-repeat="instruction in recipe.instructions | orderBy:'id'" ng-mouseenter='showAddNote(instruction)' ng-mouseleave='hideAddNotes()'>
+          <span editable-textarea='instruction.body' e-rows="4" e-cols="80" onaftersave='updateRecipe()'>
+            {{ instruction.body }}
+          </span>
+
+          <a href ng-if='!notesEmpty(instruction)' ng-click="openModal(instruction, 'Instruction')">
+            {{ noteCount(instruction) }}
+          </a>
+          <a href ng-if='notesEmpty(instruction) && isHovered(instruction)' ng-click="openModal(instruction, 'Instruction')">
+            + add a note
+          </a>
+        </p>
+        <p><a href ng-click="addComponent('instructions')">+ add a new instruction</a></p>
 
       </div>
 
