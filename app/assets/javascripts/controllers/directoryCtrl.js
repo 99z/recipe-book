@@ -12,6 +12,12 @@ recipeBook.controller('directoryCtrl', ['$scope', '$location', 'Restangular', 'A
                      .one('profiles', user.id)
                      .get()
                      .$object;
+
+      Restangular.all('recipes').getList().then(function(recipes) {
+        user.recipes = $.grep(recipes, function(recipe) {
+          return recipe.user_id == user.id;
+        });
+      })
     });
   });
 

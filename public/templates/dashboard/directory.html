@@ -25,6 +25,7 @@
 
             <p><strong>{{ user.profile.first_name }} {{ user.profile.last_name }}</strong></p>
             <p><strong>From: </strong>{{ user.profile.location }}</p>
+            <p><strong>Number of recipes: </strong>{{ user.recipes.length }}</p>
             <a href="/#/users/{{ user.id }}" class="btn btn-primary btn-block">view profile</a>
           </div>
         </div>
