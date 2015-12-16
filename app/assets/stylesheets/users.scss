@@ -4,6 +4,10 @@
 
 *, *:before, *:after {box-sizing:  border-box !important;}
 
+input[type='file'] {
+  color: transparent;
+}
+
 img.recipe-img {
   width: 100%;
   height: auto;

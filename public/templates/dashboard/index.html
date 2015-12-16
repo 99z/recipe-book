@@ -12,17 +12,30 @@
 
             <div class='row'>
               <div class='col-xs-12'>
-                <div class="follow-img">
-                  <img class="img-responsive" ng-src="{{ follow.profile.avatar }}">
-                  <!-- <a href class="btn btn-primary view">unfollow</a> -->
-                  <!-- <a href="/#/users/{{ follow.id }}" class="btn btn-primary add">view profile</a> -->
+                <div class="row">
+                  <div class="col-xs-4">
+                    <div class="follow-img">
+                      <img class="img-responsive" ng-src="{{ follow.profile.avatar }}">
+                      <!-- <a href class="btn btn-primary view">unfollow</a> -->
+                      <!-- <a href="/#/users/{{ follow.id }}" class="btn btn-primary add">view profile</a> -->
+                    </div>
+                  </div>
+
+                  <div class="col-xs-8">
+                    <p><strong>{{ follow.profile.first_name }} {{ follow.profile.last_name }}</strong></p>
+                    <p><strong>From: </strong>{{ follow.profile.location }}</p>
+                    <p><strong>Number of recipes: </strong>{{ follow.recipes.length }}</p>
+                  </div>
                 </div>
 
-                <p><strong>{{ follow.profile.first_name }} {{ follow.profile.last_name }}</strong></p>
-                <p><strong>From: </strong>{{ follow.profile.location }}</p>
-                <p><strong>Number of recipes: </strong>{{ follow.recipes.length }}</p>
-                <a href="/#/users/{{ follow.id }}" class="btn btn-primary">view profile</a>
-                <a href ng-click="unfollow(follow, $index)" class="btn btn-primary pull-right">unfollow</a>
+                <div class="row">
+                  <div class="col-xs-6">
+                    <a href="/#/users/{{ follow.id }}" class="btn btn-primary">view profile</a>
+                  </div>
+                  <div class="col-xs-6">
+                    <a href ng-click="unfollow(follow, $index)" class="btn btn-primary pull-right">unfollow</a>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -42,16 +55,33 @@
         <div ng-repeat="follower in followers | filter:filterText" class="item">
 
           <div class="well">
-            <div class="follow-img">
-              <img class="img-responsive" ng-src="{{ follower.profile.avatar }}">
-              <!-- <a href class="btn btn-primary view">unfollow</a>
-              <a href="/#/users/{{ follower.id }}" class="btn btn-primary add">view profile</a> -->
-            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="row">
 
-            <p><strong>{{ follower.profile.first_name}} {{ follower.profile.last_name }}</strong></p>
-            <p><strong>From: </strong>{{ follower.profile.location }}</p>
-            <p><strong>Number of recipes: </strong>{{ follower.recipes.length }}</p>
-            <a href="/#/users/{{ follower.id }}" class="btn btn-primary">view profile</a>
+                  <div class="col-xs-4">
+                    <div class="follow-img">
+                      <img class="img-responsive" ng-src="{{ follower.profile.avatar }}">
+                      <!-- <a href class="btn btn-primary view">unfollow</a>
+                      <a href="/#/users/{{ follower.id }}" class="btn btn-primary add">view profile</a> -->
+                    </div>
+                  </div>
+
+                  <div class="col-xs-8">
+                    <p><strong>{{ follower.profile.first_name}} {{ follower.profile.last_name }}</strong></p>
+                    <p><strong>From: </strong>{{ follower.profile.location }}</p>
+                    <p><strong>Number of recipes: </strong>{{ follower.recipes.length }}</p>
+                  </div>
+                </div>
+
+
+                <div class="row">
+                  <div class="col-xs-12">
+                    <a href="/#/users/{{ follower.id }}" class="btn btn-primary btn-block">view profile</a>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 

@@ -6,38 +6,62 @@
       <img ng-src="{{profile.avatar}}" class="img-responsive">
 
       <form name='avatarForm' ng-submit="updateProfile()" ng-if="currentUserID == currentProfileID">
-        <input type="file" name="avatar" onchange="angular.element(this).scope().uploadFile(this.files)">
+        <label>Upload a new profile image: </label><input id="avatar-upload" type="file" name="avatar" onchange="angular.element(this).scope().uploadFile(this.files)">
       </form>
-
     </div>
 
     <div name="profile-info" class="col-xs-8" ng-if="currentUserID == currentProfileID">
-      <h2 class="text-center">
-        <a href="#" editable-text="profile.first_name" onaftersave="updateProfile()">{{ profile.first_name }} </a>
-        <a href="#" editable-text="profile.last_name" onaftersave="updateProfile()">{{ profile.last_name }}</a>
-      </h2>
+      <div class="row">
+        <div class="col-xs-12">
+          <h2 class="text-center">
+            <a href="#" editable-text="profile.first_name" onaftersave="updateProfile()">{{ profile.first_name }} </a>
+            <a href="#" editable-text="profile.last_name" onaftersave="updateProfile()">{{ profile.last_name }}</a>
+          </h2>
+        </div>
+      </div>
 
-      <br />
+      <div class="row">
+        <div class="col-xs-12">
+          <p class="location">
+            <strong>From: </strong><a href="#" editable-text="profile.location" onaftersave="updateProfile()">{{ profile.location }}</a>
+          </p>
+        </div>
+      </div>
 
-      <p class="location">
-        <strong>From: </strong><a href="#" editable-text="profile.location" onaftersave="updateProfile()">{{ profile.location }}</a>
-      </p>
-
-      <br />
-
-      <p class="recipe-count"><strong>Number of recipes: </strong> {{ recipes.length }}</p>
-      <button type="button" class="btn btn-primary pull-right" ng-click="deleteAccount(); removeAcct()">Delete account?</button>
+      <div class="row">
+        <div class="col-xs-12">
+          <p class="recipe-count"><strong>Number of recipes: </strong> {{ recipes.length }}</p>
+          <button type="button" class="btn btn-primary pull-right" ng-click="deleteAccount(); removeAcct()">Delete account?</button>
+        </div>
+      </div>
     </div>
 
     <div name="profile-info" class="col-xs-8" ng-if="currentUserID != currentProfileID">
-      <h2 class="text-center">{{ profile.first_name }} {{ profile.last_name }}</h2>
-      <br />
-      <p class="location"><strong>From: </strong>{{ profile.location }}</p>
-      <br />
-      <p class="recipe-count"><strong>Number of recipes: </strong> {{ recipes.length }}</p>
-      <div id="follow-button">
-        <button type="button" class="btn btn-primary pull-right" ng-click="follow(profile.user_id)" ng-hide="!alreadyFollowed">Follow</button>
-        <button type="button" class="btn btn-primary pull-right" ng-click="unfollow(profile.user_id)" ng-hide="alreadyFollowed">Unfollow</button>
+      <div class="row">
+        <div class="col-xs-12">
+          <h2 class="text-center">{{ profile.first_name }} {{ profile.last_name }}</h2>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <p class="location"><strong>From: </strong>{{ profile.location }}</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <p class="recipe-count"><strong>Number of recipes: </strong> {{ recipes.length }}</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <div id="follow-button">
+            <button type="button" class="btn btn-primary pull-right" ng-click="follow(profile.user_id)" ng-hide="!alreadyFollowed">Follow</button>
+            <button type="button" class="btn btn-primary pull-right" ng-click="unfollow(profile.user_id)" ng-hide="alreadyFollowed">Unfollow</button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -63,46 +87,58 @@
 
   <div class="col-xs-4">
     <p class="pull-right">
-      <a href ng-click="setViewMode('thumbnail')">thumbnail</a>
-      <a href ng-click="setViewMode('list')">list</a>
+      <!-- <a href ng-click="setViewMode('thumbnail')">thumbnail</a>
+      |
+      <a href ng-click="setViewMode('list')">list</a> -->
+
+      <div class="row">
+        <div class="col-xs-12">
+          <p class="pull-right">
+            <strong>Sort by:</strong>
+
+            <a href ng-click="sortType = 'title'; sortReverse = !sortReverse">title</a>
+            |
+            <a href ng-click="sortType = 'author'; sortReverse = !sortReverse">author</a>
+          </p>
+        </div>
+      </div>
     </p>
 
-    <br />
-
-    <div class="row">
-      <div class="col-xs-12">
-        <p class="pull-right">
-          <strong>Sort by:</strong>
-
-          <a href ng-click="sortType = 'title'; sortReverse = !sortReverse">title</a>
-          <a href ng-click="sortType = 'author'; sortReverse = !sortReverse">author</a>
-        </p>
-      </div>
-    </div>
   </div>
 
 </div>
 
-<div ng-if="viewMode == 'thumbnail'" class="row recipes">
+<div ng-if="viewMode == 'thumbnail'" class="row recipes container-fluid">
 
   <div ng-repeat="recipe in recipes | filter:filterText | orderBy:sortType:sortReverse" class="item">
 
     <div class="well">
-      <div class="recipe-img">
-        <img class="img-responsive" ng-src="{{ recipe.photo_url }}">
-        <a href="/#/recipes/{{recipe.id}}" class="btn btn-primary view">view</a>
-        <a href class="btn btn-primary add">add to my book</a>
-      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="row">
 
-      <p><strong>{{ recipe.title }}</strong> by {{ recipe.author }}</p>
-      <p>ADD RECIPE ORIGIN ATTRIBUTE HERE!</p>
-      <p>Difficulty - length - rating</p>
+            <div class="col-xs-12">
+              <div class="recipe-img">
+                <img class="img-responsive" ng-src="{{ recipe.photo_url }}">
+                <a href="/#/recipes/{{recipe.id}}" class="btn btn-primary view">view</a>
+                <a href class="btn btn-primary add">add to my book</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xs-12">
+            <p><strong>{{ recipe.title }}</strong> by {{ recipe.author }}</p>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 
 </div>
 
-<div ng-if="viewMode == 'list'" class="row">
+<!-- <div ng-if="viewMode == 'list'" class="row container-fluid">
 
   <div class="col-xs-12">
     <table>
@@ -123,4 +159,4 @@
     </table>
   </div>
 
-</div>
+</div> -->

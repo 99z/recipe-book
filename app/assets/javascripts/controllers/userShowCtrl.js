@@ -40,7 +40,6 @@ recipeBook.controller('userShowCtrl', ['$scope', '$location', '$window', '$state
   };
 
   $scope.updateProfile = function() {
-    console.log($scope.profile);
     $scope.profile.put();
   };
 
