@@ -83,6 +83,7 @@ class RecipesController < ApplicationController
         @recipe = Recipe.where(:id => params[:id])[0]
       end
 
+        flash.now[:success] = "Recipe updated!"
       respond_to do |format|
         format.json { render json: @recipe.to_json(:include => [:instructions, :ingredients]), status: 200 }
       end
