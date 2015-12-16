@@ -12,9 +12,15 @@
 
       <br />
 
+      <strong>Sort by:</strong>
+
+      <a href ng-click="sortType = 'profile.last_name'; sortReverse = !sortReverse">last name</a>
+      |
+      <a href ng-click="sortType = 'recipes.length'; sortReverse = !sortReverse"># of recipes</a>
+
       <div class="row following">
 
-        <div ng-repeat="user in users | filter:filterText" class="item">
+        <div ng-repeat="user in users | filter:filterText | orderBy:sortType:sortReverse" class="item">
 
           <div class="well">
             <div class="follow-img">

@@ -1,5 +1,8 @@
 recipeBook.controller('directoryCtrl', ['$scope', '$location', 'Restangular', 'Auth', function($scope, $location, Restangular,  Auth){
 
+  $scope.sortReverse = false;
+  $scope.sortType = 'profile.last_name';
+
   Auth.currentUser().then( function(user) {
       $scope.currentUser = user;
     });
