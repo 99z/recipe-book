@@ -26,7 +26,7 @@ namespace :recipes do
         recipe.instructions.build(body: step.text.strip.gsub( /<.+?>/, " ")) unless step.text.strip.to_s.empty?
       end
 
-      recipe.author = page.search('div[itemprop=author] span[itemprop=name]').text.strip
+      recipe.author = page.search('div[itemprop=author] span[itemprop=name]')[0].text.strip
 
       # ingredients
       recipe.ingredients.delete_all
