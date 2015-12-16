@@ -6,6 +6,7 @@
 
     <%= menu_group :pull => :right do %>
       <%= menu_item "#{current_user.email}", "#/users/#{current_user.id}" %>
+      <%= menu_item "Users directory", "#/dashboard/directory" %>
       <%= menu_item "Log Out", destroy_user_session_path, :method => :delete %>
     <% end %>
 

@@ -1,6 +1,5 @@
 recipeBook.controller('dashboardCtrl', ['$scope', '$location', 'Restangular', 'Auth', function($scope, $location, Restangular,  Auth){
 
-  $scope.test = "angular works";
   Auth.currentUser().then( function(user) {
       $scope.currentUser = user;
     });
@@ -35,6 +34,12 @@ recipeBook.controller('dashboardCtrl', ['$scope', '$location', 'Restangular', 'A
                        .get()
                        .$object;
 
+        Restangular.all('recipes').getList().then(function(recipes) {
+          user.recipes = $.grep(recipes, function(recipe) {
+           return recipe.user_id == following.followed_id;
+          });
+        });
+
         $scope.following.push(user);
 
       });
@@ -50,6 +55,12 @@ recipeBook.controller('dashboardCtrl', ['$scope', '$location', 'Restangular', 'A
                        .one('profiles', follower.follower_id)
                        .get()
                        .$object;
+
+         Restangular.all('recipes').getList().then(function(recipes) {
+           user.recipes = $.grep(recipes, function(recipe) {
+            return recipe.user_id == follower.follower_id;
+           });
+         });
 
         $scope.followers.push(user);
 

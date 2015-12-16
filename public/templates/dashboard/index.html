@@ -17,6 +17,7 @@
 
             <p><strong>{{ follow.profile.first_name }} {{ follow.profile.last_name }}</strong></p>
             <p><strong>From: </strong>{{ follow.profile.location }}</p>
+            <p><strong>Number of recipes: </strong>{{ follow.recipes.length }}</p>
             <a href="/#/users/{{ follow.id }}" class="btn btn-primary">view profile</a>
             <a href ng-click="unfollow(follow, $index)" class="btn btn-primary pull-right">unfollow</a>
           </div>
@@ -43,6 +44,7 @@
 
             <p><strong>{{ follower.profile.first_name}} {{ follower.profile.last_name }}</strong></p>
             <p><strong>From: </strong>{{ follower.profile.location }}</p>
+            <p><strong>Number of recipes: </strong>{{ follower.recipes.length }}</p>
             <a href="/#/users/{{ follower.id }}" class="btn btn-primary">view profile</a>
           </div>
         </div>
@@ -85,11 +87,7 @@
             <br />
 
             <div class="row">
-              <div class="col-xs-6">
-                <a href="/#/recipes/{{item.target.id}}" class="btn btn-primary btn-block view">View recipe</a>
-              </div>
-
-              <div class="col-xs-6 add-to-book">
+              <div class="col-xs-12 add-to-book">
                 <a href ng-click="addRecipe(item.target)" class="btn btn-primary btn-block view">Add to my book</a>
               </div>
             </div>

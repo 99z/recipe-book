@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+
+      <h1 class="text-center">Directory of Users</h1>
+
+      <br />
+
+      <div class="text-center">
+        <label>Search: <input ng-model="filterText"></label>
+      </div>
+
+      <br />
+
+      <strong>Sort by:</strong>
+
+      <a href ng-click="sortType = 'profile.last_name'; sortReverse = !sortReverse">last name</a>
+      |
+      <a href ng-click="sortType = 'recipes.length'; sortReverse = !sortReverse"># of recipes</a>
+
+      <div class="row following">
+
+        <div ng-repeat="user in users | filter:filterText | orderBy:sortType:sortReverse" class="item">
+
+          <div class="well">
+            <div class="follow-img">
+              <img class="img-responsive" ng-src="{{ user.profile.avatar }}">
+              <!-- <a href class="btn btn-primary view">unfollow</a> -->
+              <!-- <a href="/#/users/{{ follow.id }}" class="btn btn-primary add">view profile</a> -->
+            </div>
+
+            <p><strong>{{ user.profile.first_name }} {{ user.profile.last_name }}</strong></p>
+            <p><strong>From: </strong>{{ user.profile.location }}</p>
+            <p><strong>Number of recipes: </strong>{{ user.recipes.length }}</p>
+            <a href="/#/users/{{ user.id }}" class="btn btn-primary btn-block">view profile</a>
+          </div>
+        </div>
+
+        <div ng-if="following.length == 0">
+          <h3>Go follow some users to see them listed here!</h3>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
