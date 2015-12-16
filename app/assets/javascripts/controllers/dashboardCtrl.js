@@ -29,10 +29,10 @@ recipeBook.controller('dashboardCtrl', ['$scope', '$location', 'Restangular', 'A
                .get()
                .$object;
 
-        user.profile = Restangular
+        /*user.profile = Restangular
                        .one('profiles', following.followed_id)
                        .get()
-                       .$object;
+                       .$object;*/
 
         Restangular.all('recipes').getList().then(function(recipes) {
           user.recipes = $.grep(recipes, function(recipe) {
@@ -51,10 +51,10 @@ recipeBook.controller('dashboardCtrl', ['$scope', '$location', 'Restangular', 'A
                .get()
                .$object;
 
-        user.profile = Restangular
+        /*user.profile = Restangular
                        .one('profiles', follower.follower_id)
                        .get()
-                       .$object;
+                       .$object;*/
 
          Restangular.all('recipes').getList().then(function(recipes) {
            user.recipes = $.grep(recipes, function(recipe) {

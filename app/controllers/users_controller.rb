@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @users
-        format.json { render json: @users }
+        format.json { render json: @users.to_json(:include => {:profile => {methods: :avatar}}) }
       else
         format.json { render nothing: true, status: 404 }
       end
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user
-        format.json { render json: @user }
+        format.json { render json: @user.to_json(:include => {:profile => {methods: :avatar}}) }
       else
         format.json { render nothing: true, status: 404 }
       end

@@ -64,7 +64,7 @@
       <div class='col-md-8'>
         <h2 class='edit-field' editable-textarea='recipe.title' e-rows="1" e-cols="60" onaftersave='updateRecipe()'>{{ recipe.title }}</h2>
         <h3 editable-textarea='recipe.author' e-rows="1" e-cols="40" onaftersave='updateRecipe()'>{{ recipe.author }}</h3>
-        <p editable-textarea='recipe.description' e-rows="4" e-cols="80"  onaftersave='updateRecipe()'>{{ recipe.description }}</p>
+        <p editable-textarea='recipe.description' e-rows="4" e-cols="85"  onaftersave='updateRecipe()'>{{ recipe.description }}</p>
       </div>
 
       <div class='col-md-4'>
@@ -111,7 +111,7 @@
         <h4>Instructions</h4>
 
         <p ng-repeat="instruction in recipe.instructions | orderBy:'id'" ng-mouseenter='showAddNote(instruction)' ng-mouseleave='hideAddNotes()'>
-          <span editable-textarea='instruction.body' e-rows="4" e-cols="80" onaftersave='updateRecipe()'>
+          <span editable-textarea='instruction.body' e-rows="4" e-cols="85" onaftersave='updateRecipe()'>
             {{ instruction.body }}
           </span>
 

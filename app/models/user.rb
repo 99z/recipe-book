@@ -73,4 +73,9 @@ class User < ActiveRecord::Base
     activity.sort! { |a,b| a['date'] <=> b['date']}
     activity.last(20).reverse
   end
+
+  #def avatar
+  #  self.profile.avatar.url
+  #end
+
 end

@@ -11,10 +11,10 @@ recipeBook.controller('directoryCtrl', ['$scope', '$location', 'Restangular', 'A
     $scope.users = users;
 
     $scope.users.forEach(function(user) {
-      user.profile = Restangular
+      /*user.profile = Restangular
                      .one('profiles', user.id)
                      .get()
-                     .$object;
+                     .$object;*/
 
       Restangular.all('recipes').getList().then(function(recipes) {
         user.recipes = $.grep(recipes, function(recipe) {
@@ -22,6 +22,8 @@ recipeBook.controller('directoryCtrl', ['$scope', '$location', 'Restangular', 'A
         });
       })
     });
+
+    console.log($scope.users);
   });
 
 }]);
